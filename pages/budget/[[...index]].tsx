@@ -2,6 +2,7 @@ import { GetServerSidePropsContext, InferGetStaticPropsType } from "next";
 import Categories from "@/components/Budget/Categories";
 import { Download, Upload } from "lucide-react";
 import PieChart from "@/components/ui/Chart";
+import Header from "@/components/ui/Header";
 import Title from "@/components/ui/Title";
 import React from "react";
 
@@ -15,7 +16,8 @@ const Budget = ({
   index,
 }: InferGetStaticPropsType<typeof getServerSideProps>) => {
   return (
-    <div className="flex min-h-screen flex-col items-center gap-4 px-4 pt-4">
+    <div className="flex min-h-screen flex-col items-center gap-4 px-4 pt-20 ">
+      <Header />
       {/* Title */}
       <Title title={index?.toString()} currency="inr" amount="22,898.00" />
       {/* Chart */}

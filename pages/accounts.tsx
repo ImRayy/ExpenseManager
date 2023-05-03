@@ -1,5 +1,4 @@
 import AccountCard from "@/components/account/AccountCard";
-import NavHeader from "@/components/ui/NavHeader";
 import Button from "@/components/ui/Button";
 import MyModal from "@/components/ui/Modal";
 import React, { useState } from "react";
@@ -8,8 +7,7 @@ const Accounts = () => {
   // const [account, setAccount] = useState({ holderName: "" });
   return (
     <div className="px-4 pt-4">
-      <NavHeader title="Account" currency="inr" amount="19,340.00" />
-      <section className="pt-20">
+      <section className="pt-4">
         <AccountCard />
       </section>
       <div className="pt-6"></div>
