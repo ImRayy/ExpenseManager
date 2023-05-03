@@ -24,7 +24,11 @@ const Budget = ({
       <section className="relative mb-5 w-2/4 rounded-full bg-white p-2">
         <PieChart />
         <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center">
-          <Download className="text-gray-500" size={40} />
+          {index?.toString() === "income" ? (
+            <Download className="text-gray-500" size={40} />
+          ) : (
+            <Upload className="text-gray-500" size={40} />
+          )}
         </div>
       </section>
       {/* Categories */}
