@@ -2,9 +2,6 @@ import { Chart, ArcElement } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import React from "react";
 Chart.register(ArcElement);
-interface ChartProps {
-  labels: object;
-}
 const PieChart = () => {
   const data = {
     labels: ["Red", "Blue", "Yellow"],

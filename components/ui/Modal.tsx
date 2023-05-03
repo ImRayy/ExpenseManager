@@ -1,6 +1,6 @@
-import React, { Fragment, SetStateAction, useState } from "react";
+import React, { Fragment, SetStateAction } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { X, Trash, Delete } from "lucide-react";
+import { X, Trash } from "lucide-react";
 import Button from "./Button";
 interface ModalProps {
   title: string;

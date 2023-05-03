@@ -7,7 +7,7 @@ interface InfoCardsProps {
   expenses: number;
 }
 
-const InfoCards = ({ income, expenses }: InfoCardsProps) => {
+const InfoCards = ({ income }: InfoCardsProps) => {
   const router = useRouter();
   return (
     <div className="flex w-full gap-4">

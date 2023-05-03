@@ -1,7 +1,6 @@
 import Card from "@/components/account/Card";
 import Button from "@/components/ui/Button";
 import MyModal from "@/components/ui/Modal";
-import Title from "@/components/ui/Title";
 import React, { useState } from "react";
 const Accounts = () => {
   const [isOpen, setIsOpen] = useState(false);
