@@ -11,7 +11,7 @@ const ButtonVariants = cva(
           "bg-gradient-to-r from-rose-500 to-rose-400 hover:bg-red-400 shadow-md shadow-red-200",
       },
       size: {
-        default: "h-8 px-4 py-1",
+        default: "h-10 px-4 py-1",
       },
     },
     defaultVariants: {

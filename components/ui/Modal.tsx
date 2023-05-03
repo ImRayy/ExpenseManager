@@ -56,20 +56,20 @@ export default function MyModal({
                 <Dialog.Panel className="fixed bottom-0 w-full max-w-md transform overflow-hidden rounded-t-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900"
+                    className="pt-6 text-xl font-medium leading-6 text-gray-900"
                   >
                     {title}
                   </Dialog.Title>
-                  <div className="mt-2">
+                  <div className="mt-4">
                     <p className="text-sm text-gray-500">{description}</p>
                   </div>
                   {children}
-                  <div className="mt-4 flex items-center justify-between">
+                  <div className="mt-8 flex items-center justify-between">
                     <span
                       className="relative z-20 rounded-full border bg-white p-1.5 text-black"
                       onClick={() => setIsOpen(false)}
                     >
-                      <X size={18} />
+                      <X size={22} />
                     </span>
                     <Button
                       variant={
