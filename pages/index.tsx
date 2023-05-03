@@ -25,7 +25,7 @@ const Home = () => {
       <section className="mb-3">
         <Title amount="19,932.00" currency="inr" />
       </section>
-      <InfoCards income={0.0} expenses={0.0} />
+      <InfoCards income="28,708.00" expenses="8,776.00" />
     </div>
   );
 };

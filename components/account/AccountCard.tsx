@@ -1,10 +1,10 @@
 import { CreditCard, Trash } from "lucide-react";
 import React from "react";
 
-const Card = () => {
+const AccountCard = () => {
   return (
     <div className="w-full rounded-lg bg-gradient-to-r from-gray-900 to-gray-600 p-4 text-sm text-white shadow-lg shadow-gray-400">
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-6">
         <div className="relative flex gap-2">
           <CreditCard size={18} />
           <span className="flex flex-col">
@@ -15,16 +15,22 @@ const Card = () => {
         </div>
         <div className="flex flex-col">
           <span className="text-xs">Total Balance</span>
-          <span className="text-lg font-semibold">$2.44</span>
+          <span className="text-xl font-bold">
+            19,000.00 <span className="font-normal">INR</span>
+          </span>
         </div>
         <div className="flex justify-between">
           <div className="flex flex-col">
             <span className="text-xs">Income</span>
-            <span>$1.0</span>
+            <span className="text-xl font-bold">
+              2,787.00 <span className="font-normal">INR</span>
+            </span>
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col text-start">
             <span className="text-xs">Expense</span>
-            <span>$0.5</span>
+            <span className="text-xl font-bold">
+              1,644.00 <span className="font-normal">INR</span>
+            </span>
           </div>
         </div>
       </div>
@@ -32,4 +38,4 @@ const Card = () => {
   );
 };
 
-export default Card;
+export default AccountCard;

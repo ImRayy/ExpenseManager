@@ -11,7 +11,7 @@ const cardVariants = cva("p-3 rounded-lg", {
         "bg-gradient-to-r from-gray-900 to-gray-500 shadow-lg shadow-gray-400",
     },
     size: {
-      default: "w-full h-24",
+      default: "w-full h-28",
     },
 
     defaultVariants: {

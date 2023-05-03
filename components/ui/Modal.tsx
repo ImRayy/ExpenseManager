@@ -4,7 +4,7 @@ import { X, Trash } from "lucide-react";
 import Button from "./Button";
 interface ModalProps {
   title: string;
-  description: string;
+  description?: string;
   buttonTxt: string;
   buttonVariant?: "delete" | "success";
   children?: React.ReactNode;
