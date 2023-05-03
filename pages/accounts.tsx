@@ -6,9 +6,9 @@ import React, { useState } from "react";
 const Accounts = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="px-4">
+    <div className="px-4 pt-4">
       <span className="text-lg font-bold">
-        <Title title="Accounts" label="Total: INR 16,000.00" />
+        {/* <Title title="Accounts" label="Total: INR 16,000.00" /> */}
       </span>
       <section className="pt-4">
         <Card />
@@ -25,9 +25,7 @@ const Accounts = () => {
         buttonTxt="Delete"
         buttonVariant="delete"
         buttonFunction={() => setIsOpen(false)}
-      >
-        None
-      </MyModal>
+      />
     </div>
   );
 };

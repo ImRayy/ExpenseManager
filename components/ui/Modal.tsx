@@ -7,7 +7,7 @@ interface ModalProps {
   description: string;
   buttonTxt: string;
   buttonVariant?: "delete" | "success";
-  children: React.ReactNode;
+  children?: React.ReactNode;
   isOpen: boolean;
   setIsOpen: React.Dispatch<SetStateAction<boolean>>;
   buttonFunction: () => void;
@@ -64,7 +64,7 @@ export default function MyModal({
                     <p className="text-sm text-gray-500">{description}</p>
                   </div>
                   {children}
-                  <div className="mt-1 flex items-center justify-between">
+                  <div className="mt-4 flex items-center justify-between">
                     <span
                       className="relative z-20 rounded-full border bg-white p-1.5 text-black"
                       onClick={() => setIsOpen(false)}
