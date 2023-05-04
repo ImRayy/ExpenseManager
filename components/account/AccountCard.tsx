@@ -1,35 +1,55 @@
 import { CreditCard, Trash } from "lucide-react";
+import { color } from "framer-motion";
 import React from "react";
-
-const AccountCard = () => {
+interface AccountCardProps {
+  accountName: string;
+  totalBalance: string;
+  income: string;
+  expense: string;
+  currency: "inr" | "dollar";
+  color?: string;
+}
+const AccountCard = ({
+  accountName,
+  totalBalance,
+  income,
+  expense,
+  currency,
+  color,
+}: AccountCardProps) => {
   return (
-    <div className="w-full rounded-lg bg-gradient-to-r from-gray-900 to-gray-600 p-4 text-sm text-white shadow-lg shadow-gray-400">
-      <div className="flex flex-col gap-6">
-        <div className="relative flex gap-2">
+    <div
+      className={`w-full  rounded-lg p-4 text-sm text-white ${
+        color || "bg-zinc-900"
+      }`}
+    >
+      <div className="flex flex-col gap-8">
+        <div className="relative flex items-center gap-2">
           <CreditCard size={18} />
           <span className="flex flex-col">
-            <span className="text-sm">BANK NAME</span>
-            <span className="text-xs">HOLDER NAME</span>
+            <span className="text-lg">{accountName}</span>
           </span>
           <Trash size={18} className="absolute right-0" />
         </div>
         <div className="flex flex-col">
           <span className="text-xs">Total Balance</span>
           <span className="text-xl font-bold">
-            19,000.00 <span className="font-normal">INR</span>
+            {totalBalance}
+            <span className="ml-2 font-normal uppercase">{currency}</span>
           </span>
         </div>
         <div className="flex justify-between">
           <div className="flex flex-col">
             <span className="text-xs">Income</span>
             <span className="text-xl font-bold">
-              2,787.00 <span className="font-normal">INR</span>
+              {income} <span className="font-normal uppercase">{currency}</span>
             </span>
           </div>
           <div className="flex flex-col text-start">
             <span className="text-xs">Expense</span>
             <span className="text-xl font-bold">
-              1,644.00 <span className="font-normal">INR</span>
+              {expense}
+              <span className="ml-2 font-normal uppercase">{currency}</span>
             </span>
           </div>
         </div>
