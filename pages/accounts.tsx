@@ -14,7 +14,6 @@ import Link from "next/link";
 
 const Accounts = () => {
   const userId = "0.653159755779475";
-  const router = useRouter();
   const accountId = Math.random().toString();
   const [data, loading] = useCollection(
     collection(db, "users", "0.653159755779475", "accounts")
@@ -29,7 +28,7 @@ const Accounts = () => {
   };
   return (
     <div className="px-4 pt-4">
-      <section className="space-y-4">
+      <section className="flex flex-col gap-4">
         {!loading && data ? (
           data.docs.map((doc, index) => (
             <Link key={index} href={`account/${doc.id}`}>
