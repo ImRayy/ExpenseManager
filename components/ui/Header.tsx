@@ -11,7 +11,7 @@ interface HeaderProps {
 const Header = ({ title, amount, currency }: HeaderProps) => {
   const router = useRouter();
   return (
-    <div className="fixed left-0 top-0 flex w-full items-center text-xl font-bold">
+    <div className="fixed left-0 top-0 z-50 flex w-full items-center text-xl font-bold backdrop-blur-sm">
       <div className="flex w-full items-center justify-between p-4">
         <span className="flex items-center gap-4">
           {router.pathname !== "/" ? (
