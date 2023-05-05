@@ -1,6 +1,6 @@
-import React, { useState } from "react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { auth } from "./_app";
+import React, { useState } from "react";
+import { auth } from "../lib/clientApp";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");

@@ -1,11 +1,10 @@
 import { CreditCard, Trash } from "lucide-react";
-import { color } from "framer-motion";
 import React from "react";
 interface AccountCardProps {
   accountName: string;
-  totalBalance: string;
-  income: string;
-  expense: string;
+  totalBalance: number;
+  income: number;
+  expense: number;
   currency: "inr" | "dollar";
   color?: string;
 }

@@ -12,7 +12,7 @@ interface ModalProps {
   setIsOpen: React.Dispatch<SetStateAction<boolean>>;
   buttonFunction: () => void;
 }
-export default function MyModal({
+export default function Modal({
   title,
   description,
   buttonTxt,
@@ -56,7 +56,7 @@ export default function MyModal({
                 <Dialog.Panel className="fixed bottom-0 w-full transform overflow-hidden rounded-t-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
-                    className="pt-6 text-xl font-medium leading-6 text-gray-900"
+                    className="pb-2 pt-2 text-xl font-medium leading-6 text-gray-900"
                   >
                     {title}
                   </Dialog.Title>
