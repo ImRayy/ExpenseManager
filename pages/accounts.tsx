@@ -7,14 +7,12 @@ import { collection } from "firebase/firestore";
 import Skeleton from "react-loading-skeleton";
 import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
-import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { db } from "@/lib/clientApp";
 import Link from "next/link";
 
 const Accounts = () => {
   const userId = "0.653159755779475";
-  const accountId = Math.random().toString();
   const [data, loading] = useCollection(
     collection(db, "users", "0.653159755779475", "accounts")
   );
@@ -22,7 +20,7 @@ const Accounts = () => {
   const [account, setAccount] = useState<accountTypes>(Object);
 
   const accountHandler = async () => {
-    const userDocRef = doc(db, "users", userId, "accounts", accountId);
+    const userDocRef = doc(db, "users", userId, "accounts", account.id);
     setDoc(userDocRef, account, { merge: true });
     setIsOpen(false);
   };

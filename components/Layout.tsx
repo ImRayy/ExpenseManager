@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 interface LayoutProps {
   children: React.ReactNode;
 }
-
 const Layout = ({ children }: LayoutProps) => {
   const router = useRouter();
   const [progress, setProgress] = useState(0);

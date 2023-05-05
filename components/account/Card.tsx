@@ -2,14 +2,16 @@ import Button from "../ui/Button";
 import React from "react";
 
 interface CardProps {
+  label: string;
+  amount: string;
   buttonFunc: () => void;
 }
-const Card = ({ buttonFunc }: CardProps) => {
+const Card = ({ label, amount, buttonFunc }: CardProps) => {
   return (
     <div className="flex w-full flex-col gap-3 rounded-2xl bg-white p-4  font-bold text-black opacity-70">
-      <span className="uppercase">Income</span>
+      <span className="uppercase">{label}</span>
       <span>
-        21,281.00
+        {amount || "0.0"}
         <span className="block whitespace-nowrap font-normal">
           Indian Rupee
         </span>

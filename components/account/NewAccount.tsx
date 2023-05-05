@@ -9,6 +9,7 @@ interface NewAccountProps {
   setAccount: React.Dispatch<SetStateAction<accountTypes>>;
 }
 const NewAccount = ({ account, setAccount }: NewAccountProps) => {
+  const id = crypto.randomUUID();
   const [color, setColor] = useState("");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -18,6 +19,7 @@ const NewAccount = ({ account, setAccount }: NewAccountProps) => {
       ["income"]: 0.0,
       ["expense"]: 0.0,
       ["color"]: `${color !== "" ? color : "bg-blue-500"}`,
+      ["id"]: `${id}`,
     });
   };
   return (
