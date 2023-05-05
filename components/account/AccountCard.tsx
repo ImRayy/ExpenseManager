@@ -24,7 +24,7 @@ const AccountCard = ({
     >
       <div className="flex flex-col gap-8">
         <div className="relative flex items-center gap-2">
-          <CreditCard size={18} />
+          <CreditCard size={26} />
           <span className="flex flex-col">
             <span className="text-lg">{accountName}</span>
           </span>
