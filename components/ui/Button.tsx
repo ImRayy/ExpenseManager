@@ -11,9 +11,11 @@ const ButtonVariants = cva(
           "text-black bg-gray-200 hover:bg-gray-300 border border-gray-200",
         relaxed_rose:
           "bg-gradient-to-r text-white from-rose-500 to-rose-400 hover:bg-red-400 shadow-md shadow-red-200",
+        solid_violet: "bg-violet-500 hover:bg-violet-600 text-white",
       },
       size: {
         default: "h-10 px-4 py-1",
+        sm: "h-8 px-4 py-1",
         equal: "p-2",
       },
       rounded: {
