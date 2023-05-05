@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div className="flex w-full flex-col gap-2 px-4 pt-20">
       {/* Header */}
-      <Header title="Home" currency="inr" amount="89,999.00" />
+      <Header isFixed={true} />
       {/* Info */}
       <section className="mb-3">
         <Title amount="19,932.00" currency="inr" />

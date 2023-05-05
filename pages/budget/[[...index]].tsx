@@ -17,7 +17,7 @@ const Budget = ({
 }: InferGetStaticPropsType<typeof getServerSideProps>) => {
   return (
     <div className="flex min-h-screen flex-col items-center gap-4 px-4 pt-20 ">
-      <Header />
+      <Header isFixed={true} />
       {/* Title */}
       <Title title={index?.toString()} currency="inr" amount="22,898.00" />
       {/* Chart */}

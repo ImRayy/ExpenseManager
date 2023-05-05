@@ -1,7 +1,10 @@
 import Button from "../ui/Button";
 import React from "react";
 
-const Card = () => {
+interface CardProps {
+  buttonFunc: () => void;
+}
+const Card = ({ buttonFunc }: CardProps) => {
   return (
     <div className="flex w-full flex-col gap-3 rounded-2xl bg-white p-4  font-bold text-black opacity-70">
       <span className="uppercase">Income</span>
@@ -15,7 +18,9 @@ const Card = () => {
         12
         <span className="block font-normal">transactions</span>
       </span>
-      <Button variant="secondary">Add Income</Button>
+      <Button variant="secondary" onClick={buttonFunc}>
+        Add Income
+      </Button>
     </div>
   );
 };
