@@ -4,6 +4,7 @@ import { Plus, Wallet } from "lucide-react";
 import Button from "../ui/Button";
 import Header from "../ui/Header";
 import Input from "../ui/Input";
+import { memo } from "react";
 interface AccountDetailsProps {
   label: "income" | "expense";
   isOpen: boolean;
@@ -33,9 +34,9 @@ const AccountDetails = ({
       <Header isFixed={false} buttonFunc={() => setIsOpen(false)} />
       <div className="space-y-6 px-4">
         <Input
-          id="amount"
+          id="title"
           type="text"
-          name="amount"
+          name="title"
           placeholder={`${
             label.charAt(0).toUpperCase() + label.slice(1)
           } Title`}
@@ -55,6 +56,7 @@ const AccountDetails = ({
             onChange={(e) => handleChange(e)}
           />
           <input
+            id="dateTime"
             type="datetime-local"
             className="w-full rounded-lg  py-2 text-black"
             placeholder="Created On"
@@ -101,4 +103,4 @@ const AccountDetails = ({
   );
 };
 
-export default AccountDetails;
+export default memo(AccountDetails);

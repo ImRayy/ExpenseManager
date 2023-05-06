@@ -12,31 +12,13 @@ import { db } from "@/lib/clientApp";
 const Account = () => {
   const router = useRouter();
   const accountId = router.asPath.split("/")[2];
+  const [totalIncome, setTotalIncome] = useState("");
+  const [totalExpense, setTotalExpense] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [accountDetails, setAccountDetails] =
     useState<accountDetailTypes>(Object);
   const [data, loading] = useCollectionData(
     collection(db, "users", "0.653159755779475", "accounts")
-  );
-  const [income, incomeLoading] = useCollectionData(
-    collection(
-      db,
-      "users",
-      "0.653159755779475",
-      "accounts",
-      router.asPath.split("/")[2],
-      "income"
-    )
-  );
-  const [expense, expenseLoading] = useCollectionData(
-    collection(
-      db,
-      "users",
-      "0.653159755779475",
-      "accounts",
-      router.asPath.split("/")[2],
-      "expense"
-    )
   );
   const accountRef = (type: "income" | "expense") => {
     return doc(
@@ -58,13 +40,8 @@ const Account = () => {
   };
 
   const firestoreHandler = async () => {
-    setDoc(accountRef("expense"), accountDetails, { merge: true });
+    setDoc(accountRef("income"), accountDetails, { merge: true });
   };
-
-  const incomeData =
-    !incomeLoading && income && (income[0] as accountDetailTypes);
-  const expenseData =
-    !expenseLoading && expense && (expense[0] as accountDetailTypes);
   if (!loading && data) {
     return (
       <div className="flex min-h-screen flex-col items-center  gap-4 bg-blue-500 pt-20 text-white">
@@ -79,17 +56,16 @@ const Account = () => {
             <Card
               buttonFunc={ModalHandler}
               label="Income"
-              amount={(incomeData && incomeData.amount) || 0.0}
+              amount={Number(totalIncome) || 0.0}
             />
-            <Card
-              buttonFunc={ModalHandler}
-              label="expense"
-              amount={(expenseData && expenseData.amount) || 0.0}
-            />
+            <Card buttonFunc={ModalHandler} label="expense" amount={0.0} />
           </div>
         </div>
         <div className="flex min-h-[40rem] w-full flex-col gap-4 rounded-t-3xl bg-white px-4 pt-10">
-          <LogCard />
+          <LogCard
+            setTotalIncome={setTotalIncome}
+            setTotalExpense={setTotalExpense}
+          />
         </div>
         <AccountDetails
           label="income"
