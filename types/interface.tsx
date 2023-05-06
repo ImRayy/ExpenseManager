@@ -6,3 +6,12 @@ export interface accountTypes {
   income: number;
   expense: number;
 }
+
+export interface accountDetailTypes {
+  title: string;
+  category: string;
+  description: string;
+  dateTime: string;
+  accountName: string;
+  amount: number;
+}

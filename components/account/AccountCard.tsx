@@ -22,7 +22,7 @@ const AccountCard = ({
         color || "bg-zinc-900"
       }`}
     >
-      <div className="flex flex-col gap-8">
+      <div className="gap- flex flex-col gap-6">
         <div className="relative flex items-center gap-2">
           <CreditCard size={26} />
           <span className="flex flex-col">
@@ -38,13 +38,13 @@ const AccountCard = ({
           </span>
         </div>
         <div className="flex justify-between">
-          <div className="flex flex-col">
+          <div className="flex w-full flex-col items-start">
             <span className="text-xs">Income</span>
             <span className="text-xl font-bold">
               {income} <span className="font-normal uppercase">{currency}</span>
             </span>
           </div>
-          <div className="flex flex-col text-start">
+          <div className="flex w-full flex-col items-start">
             <span className="text-xs">Expense</span>
             <span className="text-xl font-bold">
               {expense}

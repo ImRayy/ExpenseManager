@@ -10,7 +10,9 @@ interface NewAccountProps {
 }
 const NewAccount = ({ account, setAccount }: NewAccountProps) => {
   const id = crypto.randomUUID();
+
   const [color, setColor] = useState("");
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setAccount({
@@ -40,7 +42,9 @@ const NewAccount = ({ account, setAccount }: NewAccountProps) => {
           />
         </span>
       </section>
+
       {/* Color Picker */}
+
       <section className="w-full space-y-4 font-bold">
         <span>Choose Color</span>
         <ColorPicker setColor={setColor} />

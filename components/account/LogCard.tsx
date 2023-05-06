@@ -1,6 +1,7 @@
 import { Download, ShoppingBag, DollarSign } from "lucide-react";
 import Button from "../ui/Button";
 import React from "react";
+
 const LogCard = () => {
   return (
     <div className="w-full  space-y-4 rounded-xl bg-slate-100 p-4 text-black">

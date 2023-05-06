@@ -3,7 +3,7 @@ import React from "react";
 
 interface CardProps {
   label: string;
-  amount: string;
+  amount: number;
   buttonFunc: () => void;
 }
 const Card = ({ label, amount, buttonFunc }: CardProps) => {
