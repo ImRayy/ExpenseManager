@@ -18,12 +18,12 @@ const NewAccount = ({ account, setAccount }: NewAccountProps) => {
     setAccount({
       ...account,
       [name]: value,
-      ["income"]: 0.0,
+      ["id"]: `${id}`,
       ["expense"]: 0.0,
       ["color"]: `${color !== "" ? color : "bg-blue-500"}`,
-      ["id"]: `${id}`,
     });
   };
+
   return (
     <div className="flex flex-col items-center gap-6">
       {/* Account Name */}

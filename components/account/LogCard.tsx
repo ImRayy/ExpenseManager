@@ -8,8 +8,8 @@ import Button from "../ui/Button";
 import { memo } from "react";
 
 interface LogCardPros {
-  setTotalIncome: React.Dispatch<SetStateAction<string>>;
-  setTotalExpense: React.Dispatch<SetStateAction<string>>;
+  setTotalIncome: React.Dispatch<SetStateAction<number>>;
+  setTotalExpense: React.Dispatch<SetStateAction<number>>;
 }
 const LogCard = ({ setTotalIncome, setTotalExpense }: LogCardPros) => {
   const router = useRouter();
@@ -39,7 +39,7 @@ const LogCard = ({ setTotalIncome, setTotalExpense }: LogCardPros) => {
         totalIncome += Number(income[i]?.amount);
       }
     }
-    setTotalIncome(totalIncome.toString());
+    setTotalIncome(totalIncome);
   }, [income, expense, incomeLoading, expenseLoading]);
 
   return (

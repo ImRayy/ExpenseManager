@@ -1,9 +1,9 @@
 import { updateAccount, updateAccountDetails } from "@/lib/firestore";
 import { accountDetailTypes, accountTypes } from "@/types/interface";
+import React, { useCallback, useEffect, useState } from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
 import AccountCard from "@/components/account/AccountCard";
 import NewAccount from "@/components/account/NewAccount";
-import React, { useEffect, useState } from "react";
 import { collection } from "firebase/firestore";
 import Skeleton from "react-loading-skeleton";
 import Button from "@/components/ui/Button";
@@ -31,12 +31,15 @@ const Accounts = () => {
       ["accountName"]: `${account.accountName}`,
       ["amount"]: account.totalBalance,
     });
-  }, [account]);
+    // setAccount({ ["income"]: account.totalBalance ;
+  }, [account.accountName, account.totalBalance]);
 
-  // Object to update/add data to firestore
-  const accountHandler = async () => {
-    updateAccount(userId, account.id, account);
-    updateAccountDetails("income", account.id, userId, accDetails);
+  // Object to update/add data to firestorf
+  const accountHandler = () => {
+    if (account.id && accDetails.amount) {
+      updateAccount(userId, account.id, account);
+      updateAccountDetails("income", account.id, userId, accDetails);
+    }
     setIsOpen(false);
   };
   return (

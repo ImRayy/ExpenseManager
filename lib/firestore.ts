@@ -1,5 +1,5 @@
 import { accountDetailTypes, accountTypes } from "@/types/interface";
-import { collection, doc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "./clientApp";
 
 const updateAccountDetails = (
