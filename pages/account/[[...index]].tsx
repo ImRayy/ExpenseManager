@@ -3,6 +3,7 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 import AccountDetails from "@/components/account/AccountDetails";
 import { updateAccountDetails } from "@/lib/firestore";
 import LogCard from "@/components/account/LogCard";
+import { toast, Toaster } from "react-hot-toast";
 import { collection } from "firebase/firestore";
 import Card from "@/components/account/Card";
 import Header from "@/components/ui/Header";
@@ -32,17 +33,22 @@ const Account = () => {
 
   const firestoreHandler = async () => {
     // setDoc(accountRef('income'), accountDetails, { merge: true })
-    updateAccountDetails(
-      "income",
-      router.asPath.split("/")[2],
-      accountDetails.dateTime,
-      accountDetails
-    );
+    if (accountDetails.dateTime !== undefined && accountDetails) {
+      updateAccountDetails(
+        "income",
+        router.asPath.split("/")[2],
+        accountDetails.dateTime,
+        accountDetails
+      );
+    } else {
+      toast.error("Something went wrong");
+    }
   };
 
   if (!loading && data) {
     return (
       <div className="flex min-h-screen flex-col items-center  gap-4 bg-blue-500 pt-20 text-white">
+        <Toaster position="top-center" />
         <Header isFixed={true} buttonFunc={() => router.replace("/accounts")} />
         <div className="flex w-full flex-col gap-4 px-4">
           <Title
