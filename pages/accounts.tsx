@@ -1,13 +1,13 @@
+import { updateAccount, updateAccountDetails } from "@/lib/firestore";
+import { accountDetailTypes, accountTypes } from "@/types/interface";
 import { useCollection } from "react-firebase-hooks/firestore";
 import AccountCard from "@/components/account/AccountCard";
 import NewAccount from "@/components/account/NewAccount";
-import { setDoc, doc } from "firebase/firestore";
-import { accountTypes } from "@/types/interface";
+import React, { useEffect, useState } from "react";
 import { collection } from "firebase/firestore";
 import Skeleton from "react-loading-skeleton";
 import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
-import React, { useState } from "react";
 import { db } from "@/lib/clientApp";
 import Link from "next/link";
 
@@ -18,10 +18,25 @@ const Accounts = () => {
   );
   const [isOpen, setIsOpen] = useState(false);
   const [account, setAccount] = useState<accountTypes>(Object);
+  const [accDetails, setAccDetails] = useState<accountDetailTypes>(Object);
 
+  useEffect(() => {
+    const date = new Date();
+    // To update income data on first account creation
+    setAccDetails({
+      ["title"]: "Account Balance",
+      ["category"]: " ",
+      ["description"]: "Initial account balance",
+      ["dateTime"]: `${date.toISOString().split(":").splice(0, 2).join(":")}`,
+      ["accountName"]: `${account.accountName}`,
+      ["amount"]: account.totalBalance,
+    });
+  }, [account]);
+
+  // Object to update/add data to firestore
   const accountHandler = async () => {
-    const userDocRef = doc(db, "users", userId, "accounts", account.id);
-    setDoc(userDocRef, account, { merge: true });
+    updateAccount(userId, account.id, account);
+    updateAccountDetails("income", account.id, userId, accDetails);
     setIsOpen(false);
   };
   return (

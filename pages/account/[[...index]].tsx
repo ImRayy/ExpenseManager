@@ -1,14 +1,16 @@
 import { accountDetailTypes, accountTypes } from "@/types/interface";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import AccountDetails from "@/components/account/AccountDetails";
-import { collection, doc, setDoc } from "firebase/firestore";
+import { updateAccountDetails } from "@/lib/firestore";
 import LogCard from "@/components/account/LogCard";
+import { collection } from "firebase/firestore";
 import Card from "@/components/account/Card";
 import Header from "@/components/ui/Header";
 import Title from "@/components/ui/Title";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { db } from "@/lib/clientApp";
+
 const Account = () => {
   const router = useRouter();
   const accountId = router.asPath.split("/")[2];
@@ -20,17 +22,6 @@ const Account = () => {
   const [data, loading] = useCollectionData(
     collection(db, "users", "0.653159755779475", "accounts")
   );
-  const accountRef = (type: "income" | "expense") => {
-    return doc(
-      db,
-      "users",
-      "0.653159755779475",
-      "accounts",
-      router.asPath.split("/")[2],
-      type,
-      accountDetails.dateTime
-    );
-  };
   const ModalHandler = () => {
     setIsOpen(isOpen ? false : true);
   };
@@ -40,8 +31,15 @@ const Account = () => {
   };
 
   const firestoreHandler = async () => {
-    setDoc(accountRef("income"), accountDetails, { merge: true });
+    // setDoc(accountRef('income'), accountDetails, { merge: true })
+    updateAccountDetails(
+      "income",
+      router.asPath.split("/")[2],
+      accountDetails.dateTime,
+      accountDetails
+    );
   };
+
   if (!loading && data) {
     return (
       <div className="flex min-h-screen flex-col items-center  gap-4 bg-blue-500 pt-20 text-white">

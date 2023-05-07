@@ -8,10 +8,10 @@ export interface accountTypes {
 }
 
 export interface accountDetailTypes {
-  title: string;
-  category: string;
-  description: string;
-  dateTime: string;
-  accountName: string;
-  amount: number;
+  title?: string;
+  category?: string;
+  description?: string;
+  dateTime?: string;
+  accountName?: string;
+  amount?: number;
 }
