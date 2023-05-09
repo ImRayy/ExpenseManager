@@ -2,16 +2,16 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 import React, { useEffect, useState, SetStateAction } from "react";
 import { Download, ShoppingBag, DollarSign } from "lucide-react";
 import { collection, DocumentData } from "firebase/firestore";
+import { accountTransactionTypes } from "@/types/interface";
 import { useRouter } from "next/router";
 import { db } from "@/lib/clientApp";
 import Button from "../ui/Button";
 import { memo } from "react";
 
 interface LogCardPros {
-  setTotalIncome: React.Dispatch<SetStateAction<number>>;
-  setTotalExpense: React.Dispatch<SetStateAction<number>>;
+  setTransactionData: React.Dispatch<SetStateAction<accountTransactionTypes>>;
 }
-const LogCard = ({ setTotalIncome, setTotalExpense }: LogCardPros) => {
+const LogCard = ({ setTransactionData }: LogCardPros) => {
   const router = useRouter();
   const [data, setData] = useState<DocumentData[]>([]);
 
@@ -33,15 +33,28 @@ const LogCard = ({ setTotalIncome, setTotalExpense }: LogCardPros) => {
       setData(combinedData);
     }
     let totalIncome = 0;
-    let totalExpensed = 0;
+    let totalExpense = 0;
     for (let i = 0; i < (income?.length ?? 0); i++) {
       if (!incomeLoading && income) {
         totalIncome += Number(income[i]?.amount);
       }
     }
-    setTotalIncome(totalIncome);
+    for (let i = 0; i < (expense?.length ?? 0); i++) {
+      if (!expenseLoading && expense) {
+        totalExpense += Number(expense[i]?.amount);
+      }
+    }
+    setTransactionData({
+      income: {
+        transactions: income?.length || 0,
+        amount: totalIncome || 0,
+      },
+      expense: {
+        transactions: expense?.length || 0,
+        amount: totalExpense || 0,
+      },
+    });
   }, [income, expense, incomeLoading, expenseLoading]);
-
   return (
     <>
       {data.map((i, index) => (

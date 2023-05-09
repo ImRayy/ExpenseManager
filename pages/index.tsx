@@ -1,5 +1,4 @@
 import InfoCards from "@/components/home/InfoCards";
-// import Header from "@/components/ui/Header"ddk;
 // import Header from "@/components/ui/Header";
 import Header from "@/components/ui/Header";
 import Title from "@/components/ui/Title";

@@ -4,9 +4,10 @@ import React from "react";
 interface CardProps {
   label: string;
   amount: number;
+  transactions: number;
   buttonFunc: () => void;
 }
-const Card = ({ label, amount, buttonFunc }: CardProps) => {
+const Card = ({ label, amount, transactions, buttonFunc }: CardProps) => {
   return (
     <div className="flex w-full flex-col gap-3 rounded-2xl bg-white p-4  font-bold text-black opacity-70">
       <span className="uppercase">{label}</span>
@@ -17,8 +18,8 @@ const Card = ({ label, amount, buttonFunc }: CardProps) => {
         </span>
       </span>
       <span className="text-lg font-bold">
-        12
-        <span className="block font-normal">transactions</span>
+        {transactions}
+        <span className="block font-normal">Transactions</span>
       </span>
       <Button variant="secondary" onClick={buttonFunc}>
         Add Income

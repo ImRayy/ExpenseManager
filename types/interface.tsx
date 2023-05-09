@@ -15,3 +15,13 @@ export interface accountDetailTypes {
   accountName: string;
   amount: number;
 }
+
+export interface accountLogTypes {
+  transactions: number;
+  amount: number;
+}
+
+export interface accountTransactionTypes {
+  income: accountLogTypes;
+  expense: accountLogTypes;
+}

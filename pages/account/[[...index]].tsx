@@ -1,5 +1,9 @@
+import {
+  accountDetailTypes,
+  accountTypes,
+  accountTransactionTypes,
+} from "@/types/interface";
 import { updateAccountDetails, updateAccount } from "@/lib/firestore";
-import { accountDetailTypes, accountTypes } from "@/types/interface";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import AccountDetails from "@/components/account/AccountDetails";
 import LogCard from "@/components/account/LogCard";
@@ -18,6 +22,9 @@ const Account = () => {
   const [account, setAccount] = useState<accountTypes>(Object);
   const [totalIncome, setTotalIncome] = useState(0);
   const [totalExpense, setTotalExpense] = useState(0);
+  const [transactionsData, setTransactionsData] =
+    useState<accountTransactionTypes>(Object);
+
   const [isOpen, setIsOpen] = useState(false);
   const userId = "0.653159755779475";
   const [accountDetails, setAccountDetails] =
@@ -63,21 +70,28 @@ const Account = () => {
         <Toaster position="top-center" />
         <Header isFixed={true} buttonFunc={() => router.replace("/accounts")} />
         <div className="flex w-full flex-col gap-4 px-4">
-          <Title title="Cash" amount={totalIncome.toString()} currency="inr" />
+          <Title
+            title="Cash"
+            amount={accountDataHandler().totalBalance.toString()}
+            currency="inr"
+          />
           <div className="flex h-full w-full justify-between gap-4">
             <Card
               buttonFunc={ModalHandler}
               label="Income"
-              amount={Number(totalIncome) || 0.0}
+              amount={transactionsData.income.amount}
+              transactions={transactionsData.income.transactions}
             />
-            <Card buttonFunc={ModalHandler} label="expense" amount={0.0} />
+            <Card
+              buttonFunc={ModalHandler}
+              label="expense"
+              amount={transactionsData.expense.amount}
+              transactions={transactionsData.expense.transactions}
+            />
           </div>
         </div>
         <div className="flex min-h-[40rem] w-full flex-col gap-4 rounded-t-3xl bg-white px-4 pt-10">
-          <LogCard
-            setTotalIncome={setTotalIncome}
-            setTotalExpense={setTotalExpense}
-          />
+          <LogCard setTransactionData={setTransactionsData} />
         </div>
         <AccountDetails
           label="income"

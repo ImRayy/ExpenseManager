@@ -79,5 +79,4 @@ const Accounts = () => {
     </div>
   );
 };
-
 export default Accounts;
