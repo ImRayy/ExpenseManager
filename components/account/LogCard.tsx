@@ -1,60 +1,37 @@
-import { useCollectionData } from "react-firebase-hooks/firestore";
 import React, { useEffect, useState, SetStateAction } from "react";
 import { Download, ShoppingBag, DollarSign } from "lucide-react";
 import { collection, DocumentData } from "firebase/firestore";
-import { accountTransactionTypes } from "@/types/interface";
 import { useRouter } from "next/router";
 import { db } from "@/lib/clientApp";
 import Button from "../ui/Button";
 import { memo } from "react";
 
 interface LogCardPros {
-  setTransactionData: React.Dispatch<SetStateAction<accountTransactionTypes>>;
+  income: DocumentData[];
+  expense: DocumentData[];
 }
-const LogCard = ({ setTransactionData }: LogCardPros) => {
-  const router = useRouter();
+const LogCard = ({ income, expense }: LogCardPros) => {
   const [data, setData] = useState<DocumentData[]>([]);
 
-  const dataRef = (type: string) => {
-    return collection(
-      db,
-      "users",
-      "0.653159755779475",
-      "accounts",
-      router.asPath.split("/")[2],
-      type
-    );
-  };
-  const [income, incomeLoading] = useCollectionData(dataRef("income"));
-  const [expense, expenseLoading] = useCollectionData(dataRef("expense"));
   useEffect(() => {
-    if (!incomeLoading && income && !expenseLoading && expense) {
+    if (income && expense) {
       const combinedData = [...income, ...expense];
       setData(combinedData);
     }
     let totalIncome = 0;
     let totalExpense = 0;
     for (let i = 0; i < (income?.length ?? 0); i++) {
-      if (!incomeLoading && income) {
+      if (income) {
         totalIncome += Number(income[i]?.amount);
       }
     }
     for (let i = 0; i < (expense?.length ?? 0); i++) {
-      if (!expenseLoading && expense) {
+      if (expense) {
         totalExpense += Number(expense[i]?.amount);
       }
     }
-    setTransactionData({
-      income: {
-        transactions: income?.length || 0,
-        amount: totalIncome || 0,
-      },
-      expense: {
-        transactions: expense?.length || 0,
-        amount: totalExpense || 0,
-      },
-    });
-  }, [income, expense, incomeLoading, expenseLoading]);
+  }, [income, expense]);
+
   return (
     <>
       {data.map((i, index) => (
