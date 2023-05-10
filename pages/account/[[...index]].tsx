@@ -3,7 +3,6 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 import LogCard from "@/components/account/LogCard";
 import { ammountCalcHandler } from "@/lib/helpers";
 import React, { useEffect, useState } from "react";
-import { DocumentData } from "firebase/firestore";
 import { collection } from "firebase/firestore";
 import Card from "@/components/account/Card";
 import Header from "@/components/ui/Header";
@@ -36,7 +35,7 @@ const Account = () => {
   const [expense, expenseLoading] = useCollectionData(dataRef("expense"));
 
   useEffect(() => {
-    let totalBalance = data?.find((i) => i.id === accountId)?.totalBalance;
+    let totalBalance = data?.find((i) => i.id === accountId)?.amount;
     if (accountDetails.type === "income") {
       totalBalance = Number(totalBalance) + Number(accountDetails.amount);
     } else {
@@ -44,7 +43,7 @@ const Account = () => {
     }
     setAccount((prev) => ({
       ...prev,
-      ["totalBalance"]: totalBalance,
+      ["amount"]: totalBalance,
     }));
   }, [accountId, data, accountDetails.amount, accountDetails.type]);
 
@@ -61,7 +60,7 @@ const Account = () => {
         <div className="flex w-full flex-col gap-4 px-4">
           <Title
             title="Cash"
-            amount={accountDataHandler().totalBalance.toString()}
+            amount={accountDataHandler().amount.toString()}
             currency="inr"
           />
 

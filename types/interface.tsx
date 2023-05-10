@@ -1,7 +1,7 @@
 export interface accountTypes {
   id: string;
   accountName: string;
-  totalBalance: number;
+  amount: number;
   color: string;
   income: number;
   expense: number;

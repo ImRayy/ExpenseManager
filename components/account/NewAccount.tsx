@@ -50,9 +50,9 @@ const NewAccount = ({ account, setAccount }: NewAccountProps) => {
         <ColorPicker setColor={setColor} />
       </section>
       <Input
-        id="totalBalance"
+        id="amount"
         type="number"
-        name="totalBalance"
+        name="amount"
         onChange={(e) => handleChange(e)}
       />
     </div>

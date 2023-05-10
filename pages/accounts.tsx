@@ -10,6 +10,8 @@ import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
 import { db } from "@/lib/clientApp";
 import Link from "next/link";
+import { db } from "@/lib/clientApp";
+import Link from "next/link";
 
 const Accounts = () => {
   const userId = "0.653159755779475";
@@ -30,10 +32,10 @@ const Accounts = () => {
       ["description"]: "Initial account balance",
       ["dateTime"]: `${date.toISOString().split(":").splice(0, 2).join(":")}`,
       ["accountName"]: `${account.accountName}`,
-      ["amount"]: account.totalBalance,
+      ["amount"]: account.amount,
     });
     // setAccount({ ["income"]: account.totalBalance ;
-  }, [account.accountName, account.totalBalance]);
+  }, [account.accountName, account.amount]);
 
   // Object to update/add data to firestorf
   const accountHandler = () => {
@@ -51,7 +53,7 @@ const Accounts = () => {
             <Link key={index} href={`account/${doc.id}`}>
               <AccountCard
                 accountName={doc.data().accountName}
-                totalBalance={doc.data().totalBalance}
+                totalBalance={doc.data().amount}
                 income={doc.data().income}
                 expense={doc.data().expense}
                 currency={doc.data().currency}
