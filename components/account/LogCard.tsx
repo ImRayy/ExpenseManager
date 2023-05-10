@@ -36,7 +36,7 @@ const LogCard = ({ income, expense }: LogCardPros) => {
             </Button>
           </section>
           <section className="space-y-2">
-            <span>{i.type}</span>
+            <span>{i.title}</span>
             <div className="flex items-center gap-4">
               <Button
                 size="equal"
