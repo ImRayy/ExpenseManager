@@ -23,13 +23,17 @@ const AccountDetails = ({
 }: AccountDetailsProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setAccountDetails({ ...accountDetails, [name]: value });
+    setAccountDetails({
+      ...accountDetails,
+      [name]: value,
+      ["type"]: `${label}`,
+    });
   };
   return (
     <div
       className={`${
         isOpen ? "fixed" : "hidden"
-      } top-0 z-[99] h-full w-full space-y-6 bg-white text-black`}
+      } left-0 top-0 z-[99] h-full w-full space-y-6 bg-white text-black`}
     >
       <Header isFixed={false} buttonFunc={() => setIsOpen(false)} />
       <div className="space-y-6 px-4">

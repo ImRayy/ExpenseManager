@@ -1,9 +1,9 @@
 import { updateAccount, updateAccountDetails } from "@/lib/firestore";
 import { accountDetailTypes, accountTypes } from "@/types/interface";
-import React, { useCallback, useEffect, useState } from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
 import AccountCard from "@/components/account/AccountCard";
 import NewAccount from "@/components/account/NewAccount";
+import React, { useEffect, useState } from "react";
 import { collection } from "firebase/firestore";
 import Skeleton from "react-loading-skeleton";
 import Button from "@/components/ui/Button";
@@ -24,6 +24,7 @@ const Accounts = () => {
     const date = new Date();
     // To update income data on first account creation
     setAccDetails({
+      ["type"]: "income",
       ["title"]: "Account Balance",
       ["category"]: " ",
       ["description"]: "Initial account balance",

@@ -1,8 +1,6 @@
 import React, { useEffect, useState, SetStateAction } from "react";
 import { Download, ShoppingBag, DollarSign } from "lucide-react";
-import { collection, DocumentData } from "firebase/firestore";
-import { useRouter } from "next/router";
-import { db } from "@/lib/clientApp";
+import { DocumentData } from "firebase/firestore";
 import Button from "../ui/Button";
 import { memo } from "react";
 
@@ -17,18 +15,6 @@ const LogCard = ({ income, expense }: LogCardPros) => {
     if (income && expense) {
       const combinedData = [...income, ...expense];
       setData(combinedData);
-    }
-    let totalIncome = 0;
-    let totalExpense = 0;
-    for (let i = 0; i < (income?.length ?? 0); i++) {
-      if (income) {
-        totalIncome += Number(income[i]?.amount);
-      }
-    }
-    for (let i = 0; i < (expense?.length ?? 0); i++) {
-      if (expense) {
-        totalExpense += Number(expense[i]?.amount);
-      }
     }
   }, [income, expense]);
 

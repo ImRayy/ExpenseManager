@@ -8,6 +8,7 @@ export interface accountTypes {
 }
 
 export interface accountDetailTypes {
+  type: string;
   title: string;
   category: string;
   description: string;
