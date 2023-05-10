@@ -1,5 +1,5 @@
+import { Download, Upload, ShoppingBag, DollarSign } from "lucide-react";
 import React, { useEffect, useState, SetStateAction } from "react";
-import { Download, ShoppingBag, DollarSign } from "lucide-react";
 import { DocumentData } from "firebase/firestore";
 import Button from "../ui/Button";
 import { memo } from "react";
@@ -36,13 +36,21 @@ const LogCard = ({ income, expense }: LogCardPros) => {
             </Button>
           </section>
           <section className="space-y-2">
-            <span>{i.title}</span>
+            <span>{i.type}</span>
             <div className="flex items-center gap-4">
               <Button
                 size="equal"
-                className="bg-gradient-to-r from-green-500 to-lime-400"
+                className={`bg-gradient-to-r ${
+                  i.type === "income"
+                    ? "from-green-500 to-lime-400"
+                    : "from-black to-gray-500"
+                }`}
               >
-                <Download size={15} />
+                {i.type === "income" ? (
+                  <Download size={15} />
+                ) : (
+                  <Upload size={15} />
+                )}
               </Button>
               <span className="text-lg font-bold">{i.amount} INR</span>
             </div>

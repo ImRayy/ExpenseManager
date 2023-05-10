@@ -52,7 +52,6 @@ const Account = () => {
   const accountDataHandler = () => {
     return data?.find((i) => i.id === accountId) as accountTypes;
   };
-  console.log(accountDetails);
 
   if (!loading && data) {
     return (
@@ -94,7 +93,7 @@ const Account = () => {
             />
           </div>
         </div>
-        <div className="flex min-h-[40rem] w-full flex-col gap-4 rounded-t-3xl bg-white px-4 pt-10">
+        <div className="flex min-h-[40rem] w-full flex-col gap-4 rounded-t-3xl bg-white px-4 pb-28 pt-10">
           {!incomeLoading && income && !expenseLoading && expense && (
             <LogCard income={income} expense={expense} />
           )}
