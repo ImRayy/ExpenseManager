@@ -4,9 +4,9 @@ import Card from "../ui/Card";
 import React from "react";
 interface InfoCardsProps {
   income: string;
-  expenses: string;
+  expense: string;
 }
-const InfoCards = ({ income }: InfoCardsProps) => {
+const InfoCards = ({ income, expense }: InfoCardsProps) => {
   const router = useRouter();
   return (
     <div className="flex w-full gap-4">
@@ -31,7 +31,7 @@ const InfoCards = ({ income }: InfoCardsProps) => {
             <Upload size={14} />
             Expenses
           </span>
-          <span className="text-2xl">₹ {income}</span>
+          <span className="text-2xl">₹ {expense}</span>
         </div>
       </Card>
     </div>

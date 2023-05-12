@@ -1,26 +1,84 @@
+import { collection, getDocs, query, DocumentData } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import InfoCards from "@/components/home/InfoCards";
+import LogCard from "@/components/account/LogCard";
 import { ammountCalcHandler } from "@/lib/helpers";
-import { collection } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import Header from "@/components/ui/Header";
 import Title from "@/components/ui/Title";
 import { db } from "@/lib/clientApp";
-import React from "react";
 
 const Home = () => {
   const userId = "6f664b96-b3b5-4410-9f19-2017c24fe234";
   const accRef = collection(db, "users", userId, "accounts");
-  const [data, loading] = useCollectionData(accRef);
+  const [data, loading] = useCollectionData(
+    query(accRef /* , where("id", "in", ids) */)
+  );
+
+  const [income, setIncome] = useState<DocumentData[]>([]);
+  const [expense, setExpense] = useState<DocumentData[]>([]);
+
+  useEffect(() => {
+    const ids = [
+      "1e08945c-0ee3-4443-a0c3-5738346735bb",
+      "465f03f2-2066-49d5-a512-5f58b74a2834",
+    ];
+    const types = ["income", "expense"];
+
+    const fetchAccounts = async (type: string) => {
+      const allCollections: DocumentData[] = [];
+      const income: DocumentData[] = [];
+      const expense: DocumentData[] = [];
+
+      const promises = ids.map(async (id) => {
+        const querySnapshot = await getDocs(
+          collection(db, "users", userId, "accounts", id, type)
+        );
+        const accountData = querySnapshot.docs.map((doc) => doc.data());
+        allCollections.push(...accountData);
+      });
+
+      await Promise.all(promises);
+
+      for (const i of allCollections) {
+        for (const data of JSON.parse(i.data[0])) {
+          if (type === "income") {
+            income.push(data);
+          } else if (type === "expense") {
+            expense.push(data);
+          } else {
+            throw new Error("Wrong type, either use 'income' or 'expense'");
+          }
+        }
+      }
+
+      if (type === "income") {
+        setIncome(income);
+      } else {
+        setExpense(expense);
+      }
+    };
+
+    for (const type of types) {
+      fetchAccounts(type);
+    }
+  }, [userId]);
   if (!loading && data) {
     return (
-      <div className="flex w-full flex-col gap-2 px-4 pt-20">
+      <div className="flex w-full flex-col gap-2 bg-slate-200 px-4 pt-20">
         {/* Header */}
         <Header isFixed={true} />
         {/* Info */}
         <section className="mb-3">
           <Title amount={ammountCalcHandler(data).toString()} currency="inr" />
         </section>
-        <InfoCards income="28,708.00" expenses="8,776.00" />
+        <InfoCards
+          income={ammountCalcHandler(income).toString()}
+          expense={ammountCalcHandler(expense).toString()}
+        />
+        <div className="mt-10 flex w-full flex-col gap-4 pb-20">
+          <LogCard income={income} expense={expense} />
+        </div>
       </div>
     );
   }

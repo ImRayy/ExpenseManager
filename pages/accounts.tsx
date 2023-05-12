@@ -51,6 +51,7 @@ const Accounts = () => {
     }
     setIsOpen(false);
   };
+
   return (
     <div className="px-4 pt-4">
       <section className="flex flex-col gap-4">
