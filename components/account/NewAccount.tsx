@@ -10,7 +10,6 @@ interface NewAccountProps {
 }
 const NewAccount = ({ account, setAccount }: NewAccountProps) => {
   const id = crypto.randomUUID();
-
   const [color, setColor] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

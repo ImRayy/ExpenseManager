@@ -12,10 +12,18 @@ const LogCard = ({ income, expense }: LogCardPros) => {
   const [data, setData] = useState<DocumentData[]>([]);
 
   useEffect(() => {
-    if (income && expense) {
-      const combinedData = [...income, ...expense];
-      setData(combinedData);
+    let combinedData: DocumentData[] = [];
+
+    if (income) {
+      combinedData = [...income];
     }
+    if (expense) {
+      combinedData = [...expense];
+    }
+    if (income && expense) {
+      combinedData = [...income, ...expense];
+    }
+    setData(combinedData);
   }, [income, expense]);
 
   return (

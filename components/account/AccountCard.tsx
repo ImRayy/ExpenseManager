@@ -37,21 +37,21 @@ const AccountCard = ({
             <span className="ml-2 font-normal uppercase">{currency}</span>
           </span>
         </div>
-        <div className="flex justify-between">
-          <div className="flex w-full flex-col items-start">
-            <span className="text-xs">Income</span>
-            <span className="text-xl font-bold">
-              {income} <span className="font-normal uppercase">{currency}</span>
-            </span>
-          </div>
-          <div className="flex w-full flex-col items-start">
-            <span className="text-xs">Expense</span>
-            <span className="text-xl font-bold">
-              {expense}
-              <span className="ml-2 font-normal uppercase">{currency}</span>
-            </span>
-          </div>
-        </div>
+        {/* <div className="flex justify-between"> */}
+        {/*   <div className="flex w-full flex-col items-start"> */}
+        {/*     <span className="text-xs">Income</span> */}
+        {/*     <span className="text-xl font-bold"> */}
+        {/*       {income} <span className="font-normal uppercase">{currency}</span> */}
+        {/*     </span> */}
+        {/*   </div> */}
+        {/*   <div className="flex w-full flex-col items-start"> */}
+        {/*     <span className="text-xs">Expense</span> */}
+        {/*     <span className="text-xl font-bold"> */}
+        {/*       {expense} */}
+        {/*       <span className="ml-2 font-normal uppercase">{currency}</span> */}
+        {/*     </span> */}
+        {/*   </div> */}
+        {/* </div> */}
       </div>
     </div>
   );

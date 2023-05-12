@@ -8,29 +8,27 @@ import { collection } from "firebase/firestore";
 import Skeleton from "react-loading-skeleton";
 import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
-import { db } from "@/lib/clientApp";
-import Link from "next/link";
+import { dateTime } from "@/lib/helpers";
 import { db } from "@/lib/clientApp";
 import Link from "next/link";
 
 const Accounts = () => {
-  const userId = "0.653159755779475";
+  const userId = "6f664b96-b3b5-4410-9f19-2017c24fe234";
   const [data, loading] = useCollection(
-    collection(db, "users", "0.653159755779475", "accounts")
+    collection(db, "users", userId, "accounts")
   );
   const [isOpen, setIsOpen] = useState(false);
   const [account, setAccount] = useState<accountTypes>(Object);
   const [accDetails, setAccDetails] = useState<accountDetailTypes>(Object);
 
   useEffect(() => {
-    const date = new Date();
     // To update income data on first account creation
     setAccDetails({
       ["type"]: "income",
       ["title"]: "Account Balance",
       ["category"]: " ",
       ["description"]: "Initial account balance",
-      ["dateTime"]: `${date.toISOString().split(":").splice(0, 2).join(":")}`,
+      ["dateTime"]: `${dateTime({ time: true })}`,
       ["accountName"]: `${account.accountName}`,
       ["amount"]: account.amount,
     });
@@ -40,8 +38,16 @@ const Accounts = () => {
   // Object to update/add data to firestorf
   const accountHandler = () => {
     if (account.id && accDetails.amount) {
+      const jsonAccountData = {
+        data: [JSON.stringify(accDetails)],
+      };
       updateAccount(userId, account.id, account);
-      updateAccountDetails("income", account.id, userId, accDetails);
+      updateAccountDetails(
+        "income",
+        account.id,
+        dateTime({ time: false }),
+        jsonAccountData
+      );
     }
     setIsOpen(false);
   };
@@ -54,7 +60,7 @@ const Accounts = () => {
               <AccountCard
                 accountName={doc.data().accountName}
                 totalBalance={doc.data().amount}
-                income={doc.data().income}
+                income={0}
                 expense={doc.data().expense}
                 currency={doc.data().currency}
                 color={doc.data().color}

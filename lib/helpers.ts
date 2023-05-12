@@ -10,4 +10,23 @@ const ammountCalcHandler = (data: DocumentData[]) => {
   return totalIncome;
 };
 
-export { ammountCalcHandler };
+interface dateTimeProps {
+  time: boolean;
+}
+const dateTime = ({ time }: dateTimeProps) => {
+  const date = new Date();
+  let dateTime = "";
+  if (time) {
+    dateTime = date.toISOString().split(":").splice(0, 2).join(":");
+  } else {
+    dateTime = date
+      .toISOString()
+      .split(":")
+      .splice(0, 2)
+      .join(":")
+      .split("T")[0];
+  }
+  return dateTime;
+};
+
+export { ammountCalcHandler, dateTime };

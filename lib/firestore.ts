@@ -1,21 +1,26 @@
-import { accountDetailTypes, accountTypes } from "@/types/interface";
 import { doc, setDoc } from "firebase/firestore";
+import { accountTypes } from "@/types/interface";
+import { dateTime } from "./helpers";
 import { db } from "./clientApp";
+
+interface updateAccountDetailsProps {
+  data: string[];
+}
 
 const updateAccountDetails = (
   type: "income" | "expense",
   accountId: string,
   uid: string,
-  accDetails: accountDetailTypes
+  accDetails: updateAccountDetailsProps
 ) => {
   const accountRef = doc(
     db,
     "users",
-    "0.653159755779475",
+    "6f664b96-b3b5-4410-9f19-2017c24fe234",
     "accounts",
     accountId,
     type,
-    uid
+    dateTime({ time: false })
   );
   setDoc(accountRef, accDetails, { merge: true });
 };

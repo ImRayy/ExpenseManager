@@ -11,11 +11,12 @@ import { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
 import { db } from "@/lib/clientApp";
 const Account = () => {
+  const userId = "6f664b96-b3b5-4410-9f19-2017c24fe234";
   const dataRef = (type: string) => {
     return collection(
       db,
       "users",
-      "0.653159755779475",
+      userId,
       "accounts",
       router.asPath.split("/")[2],
       type
@@ -26,13 +27,12 @@ const Account = () => {
   const [account, setAccount] = useState<accountTypes>(Object);
   const [accountDetails, setAccountDetails] =
     useState<accountDetailTypes>(Object);
-  const userId = "0.653159755779475";
-  const [data, loading] = useCollectionData(
-    collection(db, "users", userId, "accounts")
-  );
 
   const [income, incomeLoading] = useCollectionData(dataRef("income"));
   const [expense, expenseLoading] = useCollectionData(dataRef("expense"));
+  const [data, loading] = useCollectionData(
+    collection(db, "users", userId, "accounts")
+  );
 
   useEffect(() => {
     let totalBalance = data?.find((i) => i.id === accountId)?.amount;
@@ -51,7 +51,6 @@ const Account = () => {
   const accountDataHandler = () => {
     return data?.find((i) => i.id === accountId) as accountTypes;
   };
-
   if (!loading && data) {
     return (
       <div className="flex min-h-screen flex-col items-center  gap-4 bg-blue-500 pt-20 text-white">
@@ -65,36 +64,57 @@ const Account = () => {
           />
 
           {/* Incormation cards */}
-          <div className="flex h-full w-full justify-between gap-4">
-            <Card
-              accountDetails={accountDetails}
-              setAccountDetails={setAccountDetails}
-              userId={userId}
-              accountId={accountId}
-              account={account}
-              label="income"
-              amount={
-                (!incomeLoading && income && ammountCalcHandler(income)) || 0
-              }
-              transactions={income?.length || 0}
-            />
-            <Card
-              accountDetails={accountDetails}
-              setAccountDetails={setAccountDetails}
-              userId={userId}
-              accountId={accountId}
-              account={account}
-              label="expense"
-              amount={
-                (!expenseLoading && expense && ammountCalcHandler(expense)) || 0
-              }
-              transactions={expense?.length || 0}
-            />
-          </div>
+          {!incomeLoading && income && !expenseLoading && expense && (
+            <div className="flex h-full w-full justify-between gap-4">
+              <Card
+                accountDetails={accountDetails}
+                income={income}
+                expense={expense}
+                setAccountDetails={setAccountDetails}
+                userId={userId}
+                accountId={accountId}
+                account={account}
+                label="income"
+                amount={
+                  (!incomeLoading &&
+                    income &&
+                    ammountCalcHandler(JSON.parse(income[0].data))) ||
+                  0
+                }
+                transactions={income?.length || 0}
+              />
+              <Card
+                accountDetails={accountDetails}
+                income={income}
+                expense={expense}
+                setAccountDetails={setAccountDetails}
+                userId={userId}
+                accountId={accountId}
+                account={account}
+                label="expense"
+                amount={
+                  (!expenseLoading &&
+                    expense &&
+                    ammountCalcHandler(
+                      expense.length !== 0 && JSON.parse(expense[0].data)
+                    )) ||
+                  0
+                }
+                transactions={expense?.length || 0}
+              />
+            </div>
+          )}
         </div>
         <div className="flex min-h-[40rem] w-full flex-col gap-4 rounded-t-3xl bg-white px-4 pb-28 pt-10">
           {!incomeLoading && income && !expenseLoading && expense && (
-            <LogCard income={income} expense={expense} />
+            <LogCard
+              income={
+                income && income.length !== 0 && JSON.parse(income[0].data)
+              }
+              expense={
+                expense && expense.length !== 0 && JSON.parse(expense[0].data)
+              }
+            />
           )}
         </div>
       </div>

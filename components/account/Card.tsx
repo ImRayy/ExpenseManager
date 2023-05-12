@@ -1,6 +1,7 @@
 import { updateAccount, updateAccountDetails } from "@/lib/firestore";
 import { accountDetailTypes, accountTypes } from "@/types/interface";
 import React, { SetStateAction, useState } from "react";
+import { DocumentData } from "firebase/firestore";
 import AccountDetails from "./AccountDetails";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
@@ -14,6 +15,8 @@ interface CardProps {
   userId: string;
   account: accountTypes;
   accountDetails: accountDetailTypes;
+  income: DocumentData;
+  expense: DocumentData;
   setAccountDetails: React.Dispatch<SetStateAction<accountDetailTypes>>;
 }
 const Card = ({
@@ -23,29 +26,54 @@ const Card = ({
   userId,
   accountId,
   account,
+  income,
+  expense,
   accountDetails,
   setAccountDetails,
 }: CardProps) => {
   const router = useRouter();
 
-  // State Variables
   const [isOpen, setIsOpen] = useState(false);
 
-  // Functions
   const firestoreHandler = async () => {
-    // setDoc(accountRef('income'), accountDetails, { merge: true })
-    if (accountDetails.dateTime !== undefined && accountDetails) {
+    const accAppendDetails = [];
+
+    if (accountDetails.type === "income") {
+      if (income.length !== 0) {
+        for (let i = 0; i < JSON.parse(income[0].data).length; i++) {
+          accAppendDetails.push(JSON.parse(income[0].data)[i]);
+        }
+      }
+      accAppendDetails.push(accountDetails);
+    } else {
+      if (expense.length !== 0) {
+        for (let i = 0; i < JSON.parse(expense[0].data).length; i++) {
+          accAppendDetails.push(JSON.parse(expense[0].data)[i]);
+        }
+      }
+      accAppendDetails.push(accountDetails);
+    }
+
+    const finalData = {
+      data: [JSON.stringify(accAppendDetails)],
+    };
+    if (
+      accountDetails.dateTime !== undefined &&
+      accountDetails.title !== "" &&
+      accountDetails
+    ) {
       updateAccount(userId, accountId, account);
       updateAccountDetails(
         label,
         router.asPath.split("/")[2],
         accountDetails.dateTime,
-        accountDetails
+        finalData
       );
     } else {
       toast.error("Something went wrong");
     }
   };
+
   return (
     <div className="w-full">
       <div className="flex flex-col gap-3 rounded-2xl bg-white p-4 font-bold text-black opacity-70">
