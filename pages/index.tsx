@@ -19,50 +19,49 @@ const Home = () => {
   const [expense, setExpense] = useState<DocumentData[]>([]);
 
   useEffect(() => {
-    const ids = [
-      "1e08945c-0ee3-4443-a0c3-5738346735bb",
-      "465f03f2-2066-49d5-a512-5f58b74a2834",
-    ];
-    const types = ["income", "expense"];
+    if (!loading && data) {
+      const types = ["income", "expense"];
+      const ids = data.map((i) => i.id);
 
-    const fetchAccounts = async (type: string) => {
-      const allCollections: DocumentData[] = [];
-      const income: DocumentData[] = [];
-      const expense: DocumentData[] = [];
+      const fetchAccounts = async (type: string) => {
+        const allCollections: DocumentData[] = [];
+        const income: DocumentData[] = [];
+        const expense: DocumentData[] = [];
 
-      const promises = ids.map(async (id) => {
-        const querySnapshot = await getDocs(
-          collection(db, "users", userId, "accounts", id, type)
-        );
-        const accountData = querySnapshot.docs.map((doc) => doc.data());
-        allCollections.push(...accountData);
-      });
+        const promises = ids.map(async (id) => {
+          const querySnapshot = await getDocs(
+            collection(db, "users", userId, "accounts", id, type)
+          );
+          const accountData = querySnapshot.docs.map((doc) => doc.data());
+          allCollections.push(...accountData);
+        });
 
-      await Promise.all(promises);
+        await Promise.all(promises);
 
-      for (const i of allCollections) {
-        for (const data of JSON.parse(i.data[0])) {
-          if (type === "income") {
-            income.push(data);
-          } else if (type === "expense") {
-            expense.push(data);
-          } else {
-            throw new Error("Wrong type, either use 'income' or 'expense'");
+        for (const i of allCollections) {
+          for (const data of JSON.parse(i.data[0])) {
+            if (type === "income") {
+              income.push(data);
+            } else if (type === "expense") {
+              expense.push(data);
+            } else {
+              throw new Error("Wrong type, either use 'income' or 'expense'");
+            }
           }
         }
-      }
 
-      if (type === "income") {
-        setIncome(income);
-      } else {
-        setExpense(expense);
+        if (type === "income") {
+          setIncome(income);
+        } else {
+          setExpense(expense);
+        }
+      };
+      for (const type of types) {
+        fetchAccounts(type);
       }
-    };
-
-    for (const type of types) {
-      fetchAccounts(type);
     }
-  }, [userId]);
+  }, [userId, data, loading]);
+
   if (!loading && data) {
     return (
       <div className="flex w-full flex-col gap-2 bg-slate-200 px-4 pt-20">
