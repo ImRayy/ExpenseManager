@@ -27,7 +27,7 @@ export default function Modal({
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog
           as="div"
-          className="relative z-10"
+          className="relative z-50"
           onClose={() => setIsOpen(false)}
         >
           <Transition.Child
@@ -66,7 +66,7 @@ export default function Modal({
                   {children}
                   <div className="mt-8 flex items-center justify-between">
                     <span
-                      className="relative z-20 rounded-full border bg-white p-1.5 text-black"
+                      className="relative z-[99] rounded-full border bg-white p-1.5 text-black"
                       onClick={() => setIsOpen(false)}
                     >
                       <X size={22} />
@@ -75,7 +75,7 @@ export default function Modal({
                       variant={
                         buttonVariant === "delete" ? "relaxed_rose" : "default"
                       }
-                      className="relative z-20"
+                      className="relative z-[99]"
                       onClick={buttonFunction}
                     >
                       {buttonVariant === "delete" && <Trash size={18} />}
