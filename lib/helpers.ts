@@ -12,19 +12,21 @@ const ammountCalcHandler = (data: DocumentData[]) => {
 
 interface dateTimeProps {
   time: boolean;
+  hideDay?: boolean;
 }
-const dateTime = ({ time }: dateTimeProps) => {
-  const date = new Date();
+const dateTime = ({ time, hideDay }: dateTimeProps) => {
+  const day = hideDay ? "hide" : "show";
+  const currentDate = new Date().toISOString();
+
   let dateTime = "";
   if (time) {
-    dateTime = date.toISOString().split(":").splice(0, 2).join(":");
+    dateTime = currentDate.split(":").splice(0, 2).join(":");
   } else {
-    dateTime = date
-      .toISOString()
-      .split(":")
-      .splice(0, 2)
-      .join(":")
-      .split("T")[0];
+    if (day === "show") {
+      dateTime = currentDate.split("T")[0];
+    } else {
+      dateTime = currentDate.split("-").splice(0, 2).join("-");
+    }
   }
   return dateTime;
 };
