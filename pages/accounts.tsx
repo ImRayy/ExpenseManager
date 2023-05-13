@@ -24,6 +24,7 @@ const Accounts = () => {
     // To update income data on first account creation
     setAccDetails({
       ["type"]: "income",
+      ["accountName"]: `${account.accountName}`,
       ["title"]: "Account Balance",
       ["dateTime"]: `${dateTime({ time: true })}`,
       ["amount"]: account.amount,

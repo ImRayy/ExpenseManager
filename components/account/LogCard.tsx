@@ -1,5 +1,5 @@
-import { Download, Upload, ShoppingBag, DollarSign } from "lucide-react";
-import React, { useEffect, useState, SetStateAction } from "react";
+import { Download, Upload, ShoppingBag, Wallet } from "lucide-react";
+import React, { useEffect, useState } from "react";
 import { DocumentData } from "firebase/firestore";
 import Button from "../ui/Button";
 import { memo } from "react";
@@ -38,9 +38,9 @@ const LogCard = ({ income, expense }: LogCardPros) => {
               <ShoppingBag size={16} />
               Shopping
             </Button>
-            <Button size="sm">
-              <DollarSign size={16} />
-              Cash
+            <Button size="sm" className="capitalize">
+              <Wallet size={16} />
+              {i.accountName}
             </Button>
           </section>
           <section className="space-y-2">

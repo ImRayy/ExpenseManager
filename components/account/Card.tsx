@@ -100,6 +100,7 @@ const Card = ({
       <AccountDetails
         label={label}
         isOpen={isOpen}
+        accountName={account.accountName}
         setIsOpen={setIsOpen}
         buttonFunc={firestoreHandler}
         accountDetails={accountDetails}

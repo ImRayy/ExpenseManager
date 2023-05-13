@@ -80,7 +80,7 @@ const Account = () => {
                 setAccountDetails={setAccountDetails}
                 userId={userId}
                 accountId={accountId}
-                account={account}
+                account={accountDataHandler()}
                 label="income"
                 amount={
                   (!incomeLoading &&
@@ -97,7 +97,7 @@ const Account = () => {
                 setAccountDetails={setAccountDetails}
                 userId={userId}
                 accountId={accountId}
-                account={account}
+                account={accountDataHandler()}
                 label="expense"
                 amount={
                   (!expenseLoading &&

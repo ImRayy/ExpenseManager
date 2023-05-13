@@ -7,6 +7,7 @@ import Input from "../ui/Input";
 import { memo } from "react";
 interface AccountDetailsProps {
   label: "income" | "expense";
+  accountName: string;
   isOpen: boolean;
   setIsOpen: React.Dispatch<SetStateAction<boolean>>;
   buttonFunc: () => void;
@@ -15,6 +16,7 @@ interface AccountDetailsProps {
 }
 const AccountDetails = ({
   label,
+  accountName,
   isOpen,
   setIsOpen,
   buttonFunc,
@@ -27,8 +29,10 @@ const AccountDetails = ({
       ...accountDetails,
       [name]: value,
       ["type"]: `${label}`,
+      ["accountName"]: `${accountName}`,
     });
   };
+
   return (
     <div
       className={`${
