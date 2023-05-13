@@ -56,12 +56,16 @@ const Account = () => {
 
   if (!loading && data) {
     return (
-      <div className="flex min-h-screen flex-col items-center  gap-4 bg-blue-500 pt-20 text-white">
+      <div
+        className={`flex min-h-screen flex-col items-center ${
+          accountDataHandler().color
+        }  gap-4  pt-20 text-white`}
+      >
         <Toaster position="top-center" />
         <Header isFixed={true} buttonFunc={() => router.replace("/accounts")} />
         <div className="flex w-full flex-col gap-4 px-4">
           <Title
-            title="Cash"
+            title={accountDataHandler().accountName}
             amount={accountDataHandler().amount.toString()}
             currency="inr"
           />
