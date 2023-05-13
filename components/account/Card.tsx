@@ -3,6 +3,7 @@ import { accountDetailTypes, accountTypes } from "@/types/interface";
 import React, { SetStateAction, useState } from "react";
 import { DocumentData } from "firebase/firestore";
 import AccountDetails from "./AccountDetails";
+import { dateTime } from "@/lib/helpers";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
 import Button from "../ui/Button";
@@ -55,7 +56,7 @@ const Card = ({
     }
 
     const finalData = {
-      data: [JSON.stringify(accAppendDetails)],
+      data: JSON.stringify(accAppendDetails),
     };
     if (
       accountDetails.dateTime !== undefined &&
@@ -66,7 +67,7 @@ const Card = ({
       updateAccountDetails(
         label,
         router.asPath.split("/")[2],
-        accountDetails.dateTime,
+        dateTime({ time: false, hideDay: true }),
         finalData
       );
     } else {

@@ -37,9 +37,8 @@ const Home = () => {
         });
 
         await Promise.all(promises);
-
         for (const i of allCollections) {
-          for (const data of JSON.parse(i.data[0])) {
+          for (const data of JSON.parse(i.data)) {
             if (type === "income") {
               income.push(data);
             } else if (type === "expense") {
@@ -49,7 +48,6 @@ const Home = () => {
             }
           }
         }
-
         if (type === "income") {
           setIncome(income);
         } else {
@@ -64,7 +62,7 @@ const Home = () => {
 
   if (!loading && data) {
     return (
-      <div className="flex w-full flex-col gap-2 bg-slate-200 px-4 pt-20">
+      <div className="flex w-full flex-col gap-2 bg-white px-4 pt-20">
         {/* Header */}
         <Header isFixed={true} />
         {/* Info */}
@@ -75,7 +73,7 @@ const Home = () => {
           income={ammountCalcHandler(income).toString()}
           expense={ammountCalcHandler(expense).toString()}
         />
-        <div className="mt-10 flex w-full flex-col gap-4 pb-20">
+        <div className="mt-10 flex min-h-screen w-full flex-col gap-4  pb-20">
           <LogCard income={income} expense={expense} />
         </div>
       </div>

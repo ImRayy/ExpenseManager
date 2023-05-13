@@ -1,10 +1,10 @@
 import { updateAccount, updateAccountDetails } from "@/lib/firestore";
 import { accountDetailTypes, accountTypes } from "@/types/interface";
 import { useCollection } from "react-firebase-hooks/firestore";
+import { DocumentData, collection } from "firebase/firestore";
 import AccountCard from "@/components/account/AccountCard";
 import NewAccount from "@/components/account/NewAccount";
 import React, { useEffect, useState } from "react";
-import { collection } from "firebase/firestore";
 import Skeleton from "react-loading-skeleton";
 import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
@@ -19,17 +19,13 @@ const Accounts = () => {
   );
   const [isOpen, setIsOpen] = useState(false);
   const [account, setAccount] = useState<accountTypes>(Object);
-  const [accDetails, setAccDetails] = useState<accountDetailTypes>(Object);
-
+  const [accDetails, setAccDetails] = useState(Object);
   useEffect(() => {
     // To update income data on first account creation
     setAccDetails({
       ["type"]: "income",
       ["title"]: "Account Balance",
-      ["category"]: " ",
-      ["description"]: "Initial account balance",
       ["dateTime"]: `${dateTime({ time: true })}`,
-      ["accountName"]: `${account.accountName}`,
       ["amount"]: account.amount,
     });
     // setAccount({ ["income"]: account.totalBalance ;
@@ -37,16 +33,18 @@ const Accounts = () => {
 
   // Object to update/add data to firestorf
   const accountHandler = () => {
+    const accAppendData = [];
+    accAppendData.push(accDetails);
     if (account.id && accDetails.amount) {
-      const jsonAccountData = {
-        data: [JSON.stringify(accDetails)],
+      const finalData = {
+        data: JSON.stringify(accAppendData),
       };
       updateAccount(userId, account.id, account);
       updateAccountDetails(
         "income",
         account.id,
-        dateTime({ time: false }),
-        jsonAccountData
+        dateTime({ time: false, hideDay: true }),
+        finalData
       );
     }
     setIsOpen(false);

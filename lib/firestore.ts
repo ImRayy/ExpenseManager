@@ -1,10 +1,9 @@
 import { doc, setDoc } from "firebase/firestore";
 import { accountTypes } from "@/types/interface";
-import { dateTime } from "./helpers";
 import { db } from "./clientApp";
 
 interface updateAccountDetailsProps {
-  data: string[];
+  data: string;
 }
 
 const updateAccountDetails = (
@@ -20,7 +19,7 @@ const updateAccountDetails = (
     "accounts",
     accountId,
     type,
-    dateTime({ time: false })
+    uid
   );
   setDoc(accountRef, accDetails, { merge: true });
 };

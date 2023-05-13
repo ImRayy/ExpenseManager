@@ -1,7 +1,7 @@
 import { accountDetailTypes, accountTypes } from "@/types/interface";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import { ammountCalcHandler, dateTime } from "@/lib/helpers";
 import LogCard from "@/components/account/LogCard";
-import { ammountCalcHandler } from "@/lib/helpers";
 import React, { useEffect, useState } from "react";
 import { collection } from "firebase/firestore";
 import Card from "@/components/account/Card";
@@ -10,8 +10,10 @@ import Title from "@/components/ui/Title";
 import { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
 import { db } from "@/lib/clientApp";
+
 const Account = () => {
   const userId = "6f664b96-b3b5-4410-9f19-2017c24fe234";
+
   const dataRef = (type: string) => {
     return collection(
       db,
@@ -22,6 +24,7 @@ const Account = () => {
       type
     );
   };
+
   const router = useRouter();
   const accountId = router.asPath.split("/")[2];
   const [account, setAccount] = useState<accountTypes>(Object);
@@ -46,11 +49,11 @@ const Account = () => {
       ["amount"]: totalBalance,
     }));
   }, [accountId, data, accountDetails.amount, accountDetails.type]);
-
   // Function to filter data by account id
   const accountDataHandler = () => {
     return data?.find((i) => i.id === accountId) as accountTypes;
   };
+
   if (!loading && data) {
     return (
       <div className="flex min-h-screen flex-col items-center  gap-4 bg-blue-500 pt-20 text-white">
@@ -77,7 +80,7 @@ const Account = () => {
                 label="income"
                 amount={
                   (!incomeLoading &&
-                    income &&
+                    income.length !== 0 &&
                     ammountCalcHandler(JSON.parse(income[0].data))) ||
                   0
                 }

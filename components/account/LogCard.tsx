@@ -25,7 +25,7 @@ const LogCard = ({ income, expense }: LogCardPros) => {
     }
     setData(combinedData);
   }, [income, expense]);
-
+  // console.log(data.sort((a, b)=> a.dateTime - b.dateTime))
   return (
     <>
       {data.map((i, index) => (
