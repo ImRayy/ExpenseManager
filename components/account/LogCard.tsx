@@ -36,7 +36,7 @@ const LogCard = ({ income, expense }: LogCardPros) => {
           <section className="flex gap-3">
             <Button size="sm" variant="solid_violet">
               <ShoppingBag size={16} />
-              Shopping
+              {i.category}
             </Button>
             <Button size="sm" className="capitalize">
               <Wallet size={16} />

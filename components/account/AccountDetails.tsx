@@ -1,5 +1,6 @@
+import React, { SetStateAction, useEffect, useState } from "react";
 import { accountDetailTypes } from "@/types/interface";
-import React, { SetStateAction } from "react";
+import CategorySelector from "../ui/CategorySelecter";
 import { Plus, Wallet } from "lucide-react";
 import Button from "../ui/Button";
 import Header from "../ui/Header";
@@ -23,6 +24,7 @@ const AccountDetails = ({
   accountDetails,
   setAccountDetails,
 }: AccountDetailsProps) => {
+  const [category, setCategory] = useState("Food & Drink");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setAccountDetails({
@@ -30,14 +32,22 @@ const AccountDetails = ({
       [name]: value,
       ["type"]: `${label}`,
       ["accountName"]: `${accountName}`,
+      ["category"]: `${category}`,
     });
   };
+
+  useEffect(() => {
+    setAccountDetails((prev) => ({
+      ...prev,
+      ["category"]: `${category}`,
+    }));
+  }, [category, setAccountDetails]);
 
   return (
     <div
       className={`${
         isOpen ? "fixed" : "hidden"
-      } left-0 top-0 z-[99] h-full w-full space-y-6 bg-white text-black`}
+      } left-0 top-0 z-50 h-full w-full space-y-6 bg-white text-black`}
     >
       <Header isFixed={false} buttonFunc={() => setIsOpen(false)} />
       <div className="space-y-6 px-4">
@@ -51,10 +61,14 @@ const AccountDetails = ({
           textSize="text-3xl font-extrabold"
           onChange={(e) => handleChange(e)}
         />
-        <Button className="w-auto">
-          <Plus />
-          Add Category
-        </Button>
+        {/* <Button className="w-auto"> */}
+        {/*   <Plus /> */}
+        {/*   Add Category */}
+        {/* </Button> */}
+        <CategorySelector
+          selectedValue={category}
+          setSelectedValue={setCategory}
+        />
         <div className="space-y-2">
           <Input
             id="description"
