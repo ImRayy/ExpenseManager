@@ -5,9 +5,10 @@ import React from "react";
 
 interface HeaderProps {
   isFixed: boolean;
+  customTxt?: string;
   buttonFunc?: () => void;
 }
-const Header = ({ isFixed, buttonFunc }: HeaderProps) => {
+const Header = ({ isFixed, customTxt, buttonFunc }: HeaderProps) => {
   const router = useRouter();
   return (
     <div
@@ -22,7 +23,7 @@ const Header = ({ isFixed, buttonFunc }: HeaderProps) => {
               <ChevronLeft />
             </Button>
           ) : (
-            <span>Hi, RAY!</span>
+            <span>{customTxt || "Hi, Ray"}</span>
           )}
         </span>
         <span className="flex items-center gap-2">
