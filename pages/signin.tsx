@@ -1,16 +1,18 @@
-import { useSignInWithGoogle, useAuthState } from "react-firebase-hooks/auth";
-import Button from "@/components/ui/Button";
-import { auth } from "@/lib/clientApp";
+import SignInArea from "@/components/auth/SignInArea";
+import Header from "@/components/ui/Header";
 import React from "react";
 
 const Signin = () => {
-  const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
-  const [authUser, authLoading, authError] = useAuthState(auth);
-  console.log(authUser);
-
   return (
-    <div>
-      <Button onClick={() => signInWithGoogle()}>Login with google</Button>
+    <div className="flex min-h-screen flex-col justify-center bg-zinc-900">
+      <Header
+        isFixed={true}
+        showPathName={true}
+        customButtonClass="rounded-xl bg-zinc-800 text-white border-none shadow-md shadow-black hover:bg-zinc-700"
+      />
+      <div className="fixed bottom-36 w-full">
+        <SignInArea />
+      </div>
     </div>
   );
 };
