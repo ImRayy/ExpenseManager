@@ -6,7 +6,7 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 const Layout = ({ children }: LayoutProps) => {
-  const ignoreList = ["/"];
+  const ignoreList = ["/", "/signin"];
   const router = useRouter();
   const [progress, setProgress] = useState(0);
   useEffect(() => {
@@ -21,7 +21,7 @@ const Layout = ({ children }: LayoutProps) => {
   }, [router.events]);
 
   return (
-    <div>
+    <div className="select-none">
       <LoadingBar
         color="#3b82f6"
         progress={progress}
