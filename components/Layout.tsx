@@ -6,6 +6,7 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 const Layout = ({ children }: LayoutProps) => {
+  const ignoreList = ["/"];
   const router = useRouter();
   const [progress, setProgress] = useState(0);
   useEffect(() => {
@@ -28,7 +29,7 @@ const Layout = ({ children }: LayoutProps) => {
         onLoaderFinished={() => setProgress(0)}
       />
       <div className="min-h-screen bg-zinc-50 text-black">{children}</div>
-      <NavigationBar />
+      {!ignoreList.includes(router.pathname) && <NavigationBar />}
     </div>
   );
 };

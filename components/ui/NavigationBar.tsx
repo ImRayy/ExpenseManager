@@ -19,12 +19,12 @@ const NavigationBar = () => {
           </Link>
           <History size={22} />
           {/* Center button */}
-          <div className="w-4"></div>
-          <div className="absolute left-0 flex w-full justify-center pb-8">
-            <span className="mb-4 flex h-14 w-14 items-center rounded-full bg-blue-500 text-white shadow-lg shadow-blue-200">
-              <Plus size={22} className="w-full" />
-            </span>
-          </div>
+          {/* <div className="w-4"></div> */}
+          {/* <div className="absolute left-0 flex w-full justify-center pb-8"> */}
+          {/*   <span className="mb-4 flex h-14 w-14 items-center rounded-full bg-blue-500 text-white shadow-lg shadow-blue-200"> */}
+          {/*     <Plus size={22} className="w-full" /> */}
+          {/*   </span> */}
+          {/* </div> */}
           {/* Right two icons */}
           <Link
             href="/accounts"
