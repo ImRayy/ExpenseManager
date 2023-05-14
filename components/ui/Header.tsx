@@ -42,7 +42,7 @@ const Header = ({
 
         {/* Pathname */}
         {showPathName && (
-          <div className="absolute w-full text-center font-medium capitalize tracking-wide text-white">
+          <div className="absolute left-0 w-full text-center font-medium capitalize tracking-wide text-white">
             {router.pathname.split("/")[1]}
           </div>
         )}
