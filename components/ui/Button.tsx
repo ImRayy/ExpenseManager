@@ -12,9 +12,10 @@ const ButtonVariants = cva(
         relaxed_rose:
           "bg-gradient-to-r text-white from-rose-500 to-rose-400 hover:bg-red-400 shadow-md shadow-red-200",
         solid_violet: "bg-violet-500 hover:bg-violet-600 text-white",
+        gradient_blue: "bg-gradient-to-r from-indigo-600 to-sky-600 text-white",
       },
       size: {
-        default: "h-10 px-4 py-1",
+        default: "h-12 px-4 py-1",
         sm: "h-8 px-4 py-1",
         equal: "p-2",
       },
