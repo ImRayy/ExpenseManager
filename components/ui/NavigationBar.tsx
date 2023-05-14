@@ -10,9 +10,9 @@ const NavigationBar = () => {
         <div className="flex h-16 w-full items-center justify-between rounded-xl border bg-white bg-opacity-80 px-6  backdrop-blur-sm">
           {/* Left two icons */}
           <Link
-            href="/"
+            href="/dashboard"
             className={`z-20 cursor-pointer ${
-              router.pathname === "/" && "text-blue-500"
+              router.pathname === "/dashboard" && "text-blue-500"
             }`}
           >
             <Home size={22} />
