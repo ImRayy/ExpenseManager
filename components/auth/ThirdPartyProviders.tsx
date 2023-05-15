@@ -2,9 +2,9 @@ import {
   useSignInWithGoogle,
   useSignInWithGithub,
 } from "react-firebase-hooks/auth";
-import { auth } from "@/lib/clientApp";
 import Google from "../icons/Google";
 import Github from "../icons/Github";
+import { auth } from "@/pages/_app";
 import Button from "../ui/Button";
 import React from "react";
 

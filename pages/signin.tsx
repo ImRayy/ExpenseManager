@@ -3,7 +3,7 @@ import SignInArea from "@/components/auth/SignInArea";
 import useUser from "@/components/hooks/useUser";
 import Header from "@/components/ui/Header";
 import { useRouter } from "next/router";
-import { auth } from "@/lib/clientApp";
+import { auth } from "./_app";
 import React from "react";
 
 const Signin = () => {

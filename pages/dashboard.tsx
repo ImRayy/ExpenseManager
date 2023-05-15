@@ -9,8 +9,8 @@ import useUser from "@/components/hooks/useUser";
 import Header from "@/components/ui/Header";
 import Title from "@/components/ui/Title";
 import { useRouter } from "next/router";
-import { auth } from "@/lib/clientApp";
 import { db } from "@/lib/clientApp";
+import { auth } from "./_app";
 
 const Dashboard = () => {
   const router = useRouter();

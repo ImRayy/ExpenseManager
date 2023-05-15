@@ -11,8 +11,8 @@ import Header from "@/components/ui/Header";
 import Title from "@/components/ui/Title";
 import { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
-import { auth } from "@/lib/clientApp";
 import { db } from "@/lib/clientApp";
+import { auth } from "../_app";
 
 const Account = () => {
   const { createUser } = useUser();

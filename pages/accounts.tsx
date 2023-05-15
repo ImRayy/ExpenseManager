@@ -12,8 +12,8 @@ import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
 import { dateTime } from "@/lib/helpers";
 import { useRouter } from "next/router";
-import { auth } from "@/lib/clientApp";
 import { db } from "@/lib/clientApp";
+import { auth } from "./_app";
 import Link from "next/link";
 
 const Accounts = () => {
