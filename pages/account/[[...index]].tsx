@@ -1,40 +1,60 @@
+import { DocumentData, collection, query } from "firebase/firestore";
 import { accountDetailTypes, accountTypes } from "@/types/interface";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import { ammountCalcHandler, dateTime } from "@/lib/helpers";
+import { amountCalcHandler, dateTime } from "@/lib/helpers";
+import { useAuthState } from "react-firebase-hooks/auth";
 import LogCard from "@/components/account/LogCard";
 import React, { useEffect, useState } from "react";
-import { collection } from "firebase/firestore";
+import useUser from "@/components/hooks/useUser";
 import Card from "@/components/account/Card";
 import Header from "@/components/ui/Header";
 import Title from "@/components/ui/Title";
 import { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
+import { auth } from "@/lib/clientApp";
 import { db } from "@/lib/clientApp";
 
 const Account = () => {
-  const userId = "6f664b96-b3b5-4410-9f19-2017c24fe234";
+  const { createUser } = useUser();
+  const router = useRouter();
+  const [user] = useAuthState(auth, {
+    onUserChanged: async (user) => {
+      if (!user) {
+        router.push("/signin");
+        return;
+      }
+      createUser(user);
+    },
+  });
 
-  const dataRef = (type: string) => {
+  const dataRef = (
+    uid: string,
+    type: string
+  ): ReturnType<typeof collection> => {
     return collection(
       db,
       "users",
-      userId,
+      uid,
       "accounts",
       router.asPath.split("/")[2],
       type
     );
   };
 
-  const router = useRouter();
   const accountId = router.asPath.split("/")[2];
   const [account, setAccount] = useState<accountTypes>(Object);
   const [accountDetails, setAccountDetails] =
     useState<accountDetailTypes>(Object);
 
-  const [income, incomeLoading] = useCollectionData(dataRef("income"));
-  const [expense, expenseLoading] = useCollectionData(dataRef("expense"));
+  const [income, incomeLoading] = useCollectionData(
+    user && query(dataRef(user.uid, "income"))
+  );
+  const [expense, expenseLoading] = useCollectionData(
+    user && query(dataRef(user.uid, "expense"))
+  );
+
   const [data, loading] = useCollectionData(
-    collection(db, "users", userId, "accounts")
+    user && query(collection(db, "users", user.uid, "accounts"))
   );
 
   useEffect(() => {
@@ -53,8 +73,7 @@ const Account = () => {
   const accountDataHandler = () => {
     return data?.find((i) => i.id === accountId) as accountTypes;
   };
-
-  if (!loading && data) {
+  if (user && !loading && data) {
     return (
       <div
         className={`flex min-h-screen flex-col items-center ${
@@ -78,14 +97,14 @@ const Account = () => {
                 income={income}
                 expense={expense}
                 setAccountDetails={setAccountDetails}
-                userId={userId}
+                userId={user.uid}
                 accountId={accountId}
-                account={accountDataHandler()}
+                account={account}
                 label="income"
                 amount={
                   (!incomeLoading &&
                     income.length !== 0 &&
-                    ammountCalcHandler(JSON.parse(income[0].data))) ||
+                    amountCalcHandler(JSON.parse(income[0].data))) ||
                   0
                 }
                 transactions={income?.length || 0}
@@ -95,14 +114,14 @@ const Account = () => {
                 income={income}
                 expense={expense}
                 setAccountDetails={setAccountDetails}
-                userId={userId}
+                userId={user.uid}
                 accountId={accountId}
-                account={accountDataHandler()}
+                account={account}
                 label="expense"
                 amount={
                   (!expenseLoading &&
                     expense &&
-                    ammountCalcHandler(
+                    amountCalcHandler(
                       expense.length !== 0 && JSON.parse(expense[0].data)
                     )) ||
                   0

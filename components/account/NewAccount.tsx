@@ -1,6 +1,7 @@
 import React, { SetStateAction, useState } from "react";
 import { accountTypes } from "@/types/interface";
 import ColorPicker from "../ui/ColorPicker";
+import { useRouter } from "next/router";
 import { Wallet } from "lucide-react";
 import Input from "../ui/Input";
 

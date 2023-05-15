@@ -5,15 +5,18 @@ import React from "react";
 
 interface HeaderProps {
   isFixed: boolean;
-  customTxt?: string;
+
   showPathName?: boolean;
+  customTxt?: string;
+  userPhotoURL?: string;
   customButtonClass?: string;
   buttonFunc?: () => void;
 }
 const Header = ({
   isFixed,
-  customTxt,
   showPathName,
+  customTxt,
+  userPhotoURL,
   customButtonClass,
   buttonFunc,
 }: HeaderProps) => {
@@ -25,9 +28,9 @@ const Header = ({
         isFixed ? "fixed left-0 top-0 z-50 backdrop-blur-sm" : "block"
       } flex w-full items-center text-xl font-bold `}
     >
-      <div className="flex w-full items-center justify-between p-4">
+      <div className="flex w-full items-center justify-between p-4 text-lg font-semibold">
         <span className="flex items-center gap-4">
-          {router.pathname !== "/" ? (
+          {router.pathname !== "/dashboard" ? (
             <Button
               variant="secondary"
               size="equal"
@@ -37,7 +40,10 @@ const Header = ({
               <ChevronLeft />
             </Button>
           ) : (
-            <span>{customTxt || "Hi, Ray"}</span>
+            <span className="flex gap-1">
+              <p>Hi,</p>
+              <p className="text-blue-600">{customTxt}</p>
+            </span>
           )}
         </span>
 
@@ -55,7 +61,10 @@ const Header = ({
           )}
           {router.pathname === "/dashboard" && (
             <img
-              src="https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
+              src={
+                userPhotoURL ||
+                "https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
+              }
               alt="profile"
               className="h-10 w-10 rounded-full"
             />

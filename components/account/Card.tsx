@@ -35,7 +35,7 @@ const Card = ({
   const router = useRouter();
 
   const [isOpen, setIsOpen] = useState(false);
-
+  console.log(account);
   const firestoreHandler = async () => {
     const accAppendDetails = [];
 
@@ -65,8 +65,10 @@ const Card = ({
     ) {
       updateAccount(userId, accountId, account);
       updateAccountDetails(
+        userId,
         label,
-        router.asPath.split("/")[2],
+        // router.asPath.split("/")[2],
+        accountId,
         dateTime({ time: false, hideDay: true }),
         finalData
       );

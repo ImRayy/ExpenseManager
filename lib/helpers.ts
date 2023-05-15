@@ -1,6 +1,6 @@
 import { DocumentData } from "firebase/firestore";
 
-const ammountCalcHandler = (data: DocumentData[]) => {
+const amountCalcHandler = (data: DocumentData[]) => {
   let totalIncome = 0;
   if (data) {
     for (let i = 0; i < (data?.length ?? 0); i++) {
@@ -31,4 +31,4 @@ const dateTime = ({ time, hideDay }: dateTimeProps) => {
   return dateTime;
 };
 
-export { ammountCalcHandler, dateTime };
+export { amountCalcHandler as amountCalcHandler, dateTime };

@@ -1,21 +1,36 @@
 import { updateAccount, updateAccountDetails } from "@/lib/firestore";
+import { DocumentData, collection, query } from "firebase/firestore";
 import { accountDetailTypes, accountTypes } from "@/types/interface";
 import { useCollection } from "react-firebase-hooks/firestore";
-import { DocumentData, collection } from "firebase/firestore";
 import AccountCard from "@/components/account/AccountCard";
 import NewAccount from "@/components/account/NewAccount";
+import { useAuthState } from "react-firebase-hooks/auth";
 import React, { useEffect, useState } from "react";
+import useUser from "@/components/hooks/useUser";
 import Skeleton from "react-loading-skeleton";
 import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
 import { dateTime } from "@/lib/helpers";
+import { useRouter } from "next/router";
+import { auth } from "@/lib/clientApp";
 import { db } from "@/lib/clientApp";
 import Link from "next/link";
 
 const Accounts = () => {
-  const userId = "6f664b96-b3b5-4410-9f19-2017c24fe234";
+  const router = useRouter();
+  const { createUser } = useUser();
+  const [user] = useAuthState(auth, {
+    onUserChanged: async (user) => {
+      if (!user) {
+        router.push("/signin");
+        return;
+      }
+      createUser(user);
+    },
+  });
+
   const [data, loading] = useCollection(
-    collection(db, "users", userId, "accounts")
+    user && query(collection(db, "users", user.uid, "accounts"))
   );
   const [isOpen, setIsOpen] = useState(false);
   const [account, setAccount] = useState<accountTypes>(Object);
@@ -36,12 +51,13 @@ const Accounts = () => {
   const accountHandler = () => {
     const accAppendData = [];
     accAppendData.push(accDetails);
-    if (account.id && accDetails.amount) {
+    if (user && account.id && accDetails.amount) {
       const finalData = {
         data: JSON.stringify(accAppendData),
       };
-      updateAccount(userId, account.id, account);
+      updateAccount(user.uid, account.id, account);
       updateAccountDetails(
+        user.uid,
         "income",
         account.id,
         dateTime({ time: false, hideDay: true }),

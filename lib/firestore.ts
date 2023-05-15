@@ -7,19 +7,20 @@ interface updateAccountDetailsProps {
 }
 
 const updateAccountDetails = (
+  userUid: string,
   type: "income" | "expense",
-  accountId: string,
-  uid: string,
+  accountUid: string,
+  accDetailsUid: string,
   accDetails: updateAccountDetailsProps
 ) => {
   const accountRef = doc(
     db,
     "users",
-    "6f664b96-b3b5-4410-9f19-2017c24fe234",
+    userUid,
     "accounts",
-    accountId,
+    accountUid,
     type,
-    uid
+    accDetailsUid
   );
   setDoc(accountRef, accDetails, { merge: true });
 };
