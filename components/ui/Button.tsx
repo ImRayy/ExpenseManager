@@ -15,7 +15,8 @@ const ButtonVariants = cva(
         gradient_blue: "bg-gradient-to-r from-indigo-600 to-sky-600 text-white",
       },
       size: {
-        default: "h-12 px-4 py-1",
+        default: "h-10 px-4 py-1",
+        lg: "h-12 px-6 py-1",
         sm: "h-8 px-4 py-1",
         equal: "p-2",
       },

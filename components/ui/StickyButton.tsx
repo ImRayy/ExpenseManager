@@ -11,6 +11,7 @@ const StickyButton = ({ label, onClick, bottomContent }: StickyButtonProps) => {
   return (
     <div className="fixed bottom-0 left-0 w-full p-4">
       <Button
+        size="lg"
         className="w-full rounded-xl bg-gradient-to-r from-blue-500 to-blue-700 px-6 shadow-md shadow-blue-800"
         onClick={onClick}
       >
