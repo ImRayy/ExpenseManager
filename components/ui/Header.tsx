@@ -18,6 +18,7 @@ const Header = ({
   buttonFunc,
 }: HeaderProps) => {
   const router = useRouter();
+  const month = new Date().toString().split(" ")[1];
   return (
     <div
       className={`${
@@ -48,9 +49,11 @@ const Header = ({
         )}
         <span className="flex items-center gap-2">
           {!showPathName && (
-            <span className="rounded-full border-2 px-4 py-1 text-lg">May</span>
+            <span className="rounded-full border-2 px-4 py-1 text-lg">
+              {month}
+            </span>
           )}
-          {router.pathname === "/" && (
+          {router.pathname === "/dashboard" && (
             <img
               src="https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
               alt="profile"
