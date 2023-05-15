@@ -24,7 +24,8 @@ const AccountDetails = ({
   accountDetails,
   setAccountDetails,
 }: AccountDetailsProps) => {
-  const [category, setCategory] = useState("Food & Drink");
+  const [category, setCategory] = useState("");
+  const [variant, setVariant] = useState("");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setAccountDetails({
@@ -42,7 +43,6 @@ const AccountDetails = ({
       ["category"]: `${category}`,
     }));
   }, [category, setAccountDetails]);
-
   return (
     <div
       className={`${
@@ -67,7 +67,9 @@ const AccountDetails = ({
         {/* </Button> */}
         <CategorySelector
           selectedValue={category}
+          variant={variant}
           setSelectedValue={setCategory}
+          setVarient={setVariant}
         />
         <div className="space-y-2">
           <Input
@@ -86,26 +88,26 @@ const AccountDetails = ({
             onChange={(e) => handleChange(e)}
           />
         </div>
-        <div className="space-y-4 pt-4">
-          <span className="text-xl font-bold">Add money to</span>
-          <span className="flex flex-wrap gap-3">
-            <Button className="font-medium">
-              <Wallet size={16} />
-              RAY
-            </Button>
-            <Button variant="relaxed_rose" className="font-medium">
-              <Wallet size={16} />
-              Author
-            </Button>
-            <Button
-              variant="secondary"
-              className=" whitespace-nowrap  font-medium"
-            >
-              <Plus size={16} />
-              Add Account
-            </Button>
-          </span>
-        </div>
+        {/* <div className="space-y-4 pt-4"> */}
+        {/*   <span className="text-xl font-bold">Add money to</span> */}
+        {/*   <span className="flex flex-wrap gap-3"> */}
+        {/*     <Button className="font-medium"> */}
+        {/*       <Wallet size={16} /> */}
+        {/*       RAY */}
+        {/*     </Button> */}
+        {/*     <Button variant="relaxed_rose" className="font-medium"> */}
+        {/*       <Wallet size={16} /> */}
+        {/*       Author */}
+        {/*     </Button> */}
+        {/*     <Button */}
+        {/*       variant="secondary" */}
+        {/*       className=" whitespace-nowrap  font-medium" */}
+        {/*     > */}
+        {/*       <Plus size={16} /> */}
+        {/*       Add Account */}
+        {/*     </Button> */}
+        {/*   </span> */}
+        {/* </div> */}
         <div>
           <Input
             id="amount"
