@@ -64,11 +64,12 @@ const Card = ({
       updateAccountDetails(
         userId,
         label,
-        // router.asPath.split("/")[2],
         accountId,
         dateTime({ time: false, hideDay: true }),
         finalData
       );
+      toast.success(`Successfully added ${label}`);
+      setIsOpen(false);
     } else {
       toast.error("Something went wrong");
     }
