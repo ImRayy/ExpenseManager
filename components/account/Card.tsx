@@ -32,8 +32,6 @@ const Card = ({
   accountDetails,
   setAccountDetails,
 }: CardProps) => {
-  const router = useRouter();
-
   const [isOpen, setIsOpen] = useState(false);
   const firestoreHandler = async () => {
     const accAppendDetails = [];

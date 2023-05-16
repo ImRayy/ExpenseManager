@@ -58,7 +58,10 @@ const Account = () => {
   );
 
   useEffect(() => {
-    let totalBalance = data?.find((i) => i.id === accountId)?.amount;
+    const account = data?.find((i) => i.id === accountId);
+    let totalBalance = account?.amount;
+    const accountName = account?.accountName;
+
     if (accountDetails.type === "income") {
       totalBalance = Number(totalBalance) + Number(accountDetails.amount);
     } else {
@@ -67,6 +70,7 @@ const Account = () => {
     setAccount((prev) => ({
       ...prev,
       ["amount"]: totalBalance,
+      ["accountName"]: `${accountName}`,
     }));
   }, [accountId, data, accountDetails.amount, accountDetails.type]);
   // Function to filter data by account id
