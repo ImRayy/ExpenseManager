@@ -3,6 +3,7 @@ import { accountTypes } from "@/types/interface";
 import ColorPicker from "../ui/ColorPicker";
 import { useRouter } from "next/router";
 import { Wallet } from "lucide-react";
+import Button from "../ui/Button";
 import Input from "../ui/Input";
 
 interface NewAccountProps {
@@ -33,26 +34,30 @@ const NewAccount = ({ account, setAccount }: NewAccountProps) => {
         >
           <Wallet />
         </span>
-        <span className="mb-auto mr-4 w-full">
+        <div className="flex items-center">
           <Input
             id="account"
             type="text"
             name="accountName"
+            placeholder="Enter payment title"
             onChange={(e) => handleChange(e)}
           />
-        </span>
+        </div>
       </section>
 
       {/* Color Picker */}
-
       <section className="w-full space-y-4 font-bold">
         <span>Choose Color</span>
         <ColorPicker setColor={setColor} />
       </section>
       <Input
         id="amount"
+        variant="ghost"
         type="number"
         name="amount"
+        rounded="full"
+        placeholder="0.00"
+        className="text-center text-2xl font-bold"
         onChange={(e) => handleChange(e)}
       />
     </div>
