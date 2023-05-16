@@ -112,8 +112,9 @@ const AccountDetails = ({
 
           <Input
             id="dateTime"
+            label="Pick Date & Time"
             type="datetime-local"
-            className="w-full rounded-lg  py-2 text-black"
+            className="w-full rounded-lg  py-2 text-gray-500"
             placeholder="Created On"
             name="dateTime"
             onChange={(e) => handleChange(e)}
