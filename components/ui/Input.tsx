@@ -7,7 +7,7 @@ const InputVariants = cva("px-4 py-3 block w-full", {
       default:
         "border-gray-200 text-sm focus:border-blue-500 focus:ring-blue-500",
       underline:
-        "focus:border-gray-300 focus:border-x-transparent focus:border-t-transparent focus:outline-none focus:ring-0 border-b border-gray-300 border-x-transparent border-t-transparent",
+        "focus:border-gray-300 focus:border-x-transparent focus:border-t-transparent focus:outline-none focus:ring-0 border-b border-gray-200 border-x-transparent border-t-transparent",
       ghost:
         "focus:border-transparent focus:outline-none focus:ring-0  border-transparent",
     },
