@@ -1,27 +1,53 @@
-import React, { InputHTMLAttributes } from "react";
+import { cva, VariantProps } from "class-variance-authority";
+import React from "react";
+
+const InputVariants = cva("px-4 py-3 block w-full", {
+  variants: {
+    variant: {
+      default:
+        "border-gray-200 text-sm focus:border-blue-500 focus:ring-blue-500",
+      underline:
+        "focus:border-gray-300 focus:border-x-transparent focus:border-t-transparent focus:outline-none focus:ring-0 border-b border-gray-300 border-x-transparent border-t-transparent",
+      ghost:
+        "focus:border-transparent focus:outline-none focus:ring-0  border-transparent",
+    },
+    rounded: {
+      default: "rounded-lg",
+      none: "rounded-0",
+      full: "rounded-full",
+    },
+  },
+
+  defaultVariants: {
+    variant: "default",
+    rounded: "default",
+  },
+});
+
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement>,
+    VariantProps<typeof InputVariants> {}
+
 const Input = ({
-  id,
   label,
-  textSize,
+  variant,
+  rounded,
+  className,
   ...rest
-}: InputHTMLAttributes<HTMLInputElement> & {
+}: InputProps & {
   id: string;
   label?: string;
-  textSize?: string;
 }) => {
   return (
-    <label htmlFor={id}>
-      <div className="mb-2 pl-2 capitalize">{label}</div>
+    <div>
+      {label !== undefined && (
+        <div className="mb-2 pl-2 capitalize">{label}</div>
+      )}
       <input
-        id={id}
-        className={
-          `border-b border-gray-300 border-x-transparent border-t-transparent py-2 focus:border-gray-300 focus:border-x-transparent focus:border-t-transparent focus:outline-none focus:ring-0` +
-          " " +
-          textSize
-        }
+        className={InputVariants({ variant, rounded, className })}
         {...rest}
       />
-    </label>
+    </div>
   );
 };
 
