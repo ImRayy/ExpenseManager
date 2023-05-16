@@ -1,4 +1,4 @@
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, Calendar } from "lucide-react";
 import { useRouter } from "next/router";
 import Button from "./Button";
 import React from "react";
@@ -42,7 +42,7 @@ const Header = ({
           ) : (
             <span className="flex gap-1">
               <p>Hi,</p>
-              <p className="text-blue-600">{customTxt}</p>
+              <p className="text-blue-600">{customTxt || "User"}</p>
             </span>
           )}
         </span>
@@ -55,7 +55,8 @@ const Header = ({
         )}
         <span className="flex items-center gap-2">
           {!showPathName && (
-            <span className="rounded-full border-2 px-4 py-1 text-lg">
+            <span className="flex items-center gap-1 rounded-full border px-4  py-2 text-sm font-semibold uppercase">
+              <Calendar size={18} />
               {month}
             </span>
           )}
