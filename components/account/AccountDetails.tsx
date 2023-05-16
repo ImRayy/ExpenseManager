@@ -1,9 +1,8 @@
 import React, { SetStateAction, useEffect, useState } from "react";
 import { accountDetailTypes } from "@/types/interface";
 import CategorySelector from "../ui/CategorySelecter";
-import { Plus, Wallet } from "lucide-react";
 import Button from "../ui/Button";
-import Header from "../ui/Header";
+import { X } from "lucide-react";
 import Input from "../ui/Input";
 import { memo } from "react";
 interface AccountDetailsProps {
@@ -26,6 +25,9 @@ const AccountDetails = ({
 }: AccountDetailsProps) => {
   const [category, setCategory] = useState("");
   const [variant, setVariant] = useState("");
+
+  // HANDLER TO MONITOR INPUT CHANGES
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setAccountDetails({
@@ -37,6 +39,15 @@ const AccountDetails = ({
     });
   };
 
+  // HANDLER TO MONITOR TEXT AREA CHANGES
+
+  const handleChangeTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setAccountDetails({
+      ...accountDetails,
+      [name]: value,
+    });
+  };
   useEffect(() => {
     setAccountDetails((prev) => ({
       ...prev,
@@ -49,7 +60,20 @@ const AccountDetails = ({
         isOpen ? "fixed" : "hidden"
       } left-0 top-0 z-50 h-full w-full space-y-6 bg-white text-black`}
     >
-      <Header isFixed={false} buttonFunc={() => setIsOpen(false)} />
+      {/* CLOSE WINDOW BUTTON */}
+
+      <div className="w-full p-4">
+        <Button
+          variant="relaxed_rose"
+          size="equal"
+          className="ml-auto"
+          onClick={() => setIsOpen(false)}
+        >
+          <X />
+        </Button>
+      </div>
+
+      {/* TRANSACTION TITLE */}
       <div className="space-y-6 px-4">
         <Input
           id="title"
@@ -58,13 +82,14 @@ const AccountDetails = ({
           placeholder={`${
             label.charAt(0).toUpperCase() + label.slice(1)
           } Title`}
-          textSize="text-3xl font-extrabold"
+          variant="underline"
+          rounded="none"
+          className="text-3xl font-bold"
           onChange={(e) => handleChange(e)}
         />
-        {/* <Button className="w-auto"> */}
-        {/*   <Plus /> */}
-        {/*   Add Category */}
-        {/* </Button> */}
+
+        {/* CATEGORY SELECTOR */}
+
         <CategorySelector
           selectedValue={category}
           variant={variant}
@@ -72,14 +97,20 @@ const AccountDetails = ({
           setVarient={setVariant}
         />
         <div className="space-y-2">
-          <Input
+          {/* DESCRIPTION */}
+
+          <textarea
             id="description"
-            placeholder="Description"
             name="description"
-            className="w-full rounded-lg"
-            onChange={(e) => handleChange(e)}
+            placeholder="Description"
+            // onChange={(e) => handleChange(e)}
+            className="w-full rounded-lg border-gray-200"
+            onChange={(e) => handleChangeTextArea(e)}
           />
-          <input
+
+          {/* DATE TIME SELECTOR */}
+
+          <Input
             id="dateTime"
             type="datetime-local"
             className="w-full rounded-lg  py-2 text-black"
@@ -88,36 +119,24 @@ const AccountDetails = ({
             onChange={(e) => handleChange(e)}
           />
         </div>
-        {/* <div className="space-y-4 pt-4"> */}
-        {/*   <span className="text-xl font-bold">Add money to</span> */}
-        {/*   <span className="flex flex-wrap gap-3"> */}
-        {/*     <Button className="font-medium"> */}
-        {/*       <Wallet size={16} /> */}
-        {/*       RAY */}
-        {/*     </Button> */}
-        {/*     <Button variant="relaxed_rose" className="font-medium"> */}
-        {/*       <Wallet size={16} /> */}
-        {/*       Author */}
-        {/*     </Button> */}
-        {/*     <Button */}
-        {/*       variant="secondary" */}
-        {/*       className=" whitespace-nowrap  font-medium" */}
-        {/*     > */}
-        {/*       <Plus size={16} /> */}
-        {/*       Add Account */}
-        {/*     </Button> */}
-        {/*   </span> */}
-        {/* </div> */}
+
+        {/* AMOUNT */}
+
         <div>
           <Input
             id="amount"
             name="amount"
             type="number"
+            variant="ghost"
             placeholder="0.00"
+            className="text-center text-3xl font-bold"
             onChange={(e) => handleChange(e)}
           />
         </div>
       </div>
+
+      {/* ADD BUTTON */}
+
       <div className="fixed bottom-0 w-full p-2">
         <Button rounded="lg" className="w-full" onClick={buttonFunc}>
           Add
