@@ -73,6 +73,7 @@ const Account = () => {
   const accountDataHandler = () => {
     return data?.find((i) => i.id === accountId) as accountTypes;
   };
+
   if (user && !loading && data) {
     return (
       <div

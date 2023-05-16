@@ -35,7 +35,6 @@ const Card = ({
   const router = useRouter();
 
   const [isOpen, setIsOpen] = useState(false);
-  console.log(account);
   const firestoreHandler = async () => {
     const accAppendDetails = [];
 
